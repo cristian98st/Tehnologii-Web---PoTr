@@ -3,12 +3,12 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Log in</title>
+    <title>Sign up</title>
     <link rel="stylesheet" href="signup.css">
 </head>
 
 <body>
-        <form class="modal-content">
+        <!-- <form class="modal-content">
 
             <div class="container">
                 <label for="uname"><b>Username</b></label>
@@ -27,9 +27,9 @@
                 <button type="button" onclick="window.history.go(-1)" class="cancelbtn">Cancel</button>
                 <span class="psw"><a href="#">Forgot password?</a></span>
             </div>
-        </form>
+        </form> -->
 
-        <form style="border:1px solid #ccc">
+        <form class="modal-content">
             <div class="container">
               <h1>Sign Up</h1>
               <p>All field are compulsory for creating a new account.</p>
@@ -45,10 +45,11 @@
               <input type="password" placeholder="Repeat Password" name="psw-repeat" required>
           
               <p>By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a>.</p>
-          
+
+              <button type="submit" onclick="location.href='index_loggedin.html'">Sign up</button>
+
               <div class="container" style="background-color:#353531">
                 <button type="button" class="cancelbtn">Cancel</button>
-                <button type="submit" class="signupbtn">Sign Up</button>
               </div>
             </div>
           </form> 
