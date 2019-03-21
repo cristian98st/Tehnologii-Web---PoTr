@@ -55,7 +55,7 @@ h3.menuelem{
 .menubar{
     display: flex;
     background-color:  #353531;
-    flex: wrap;
+    flex-wrap: wrap;
     height:4%;
     justify-content: center;
     grid-column-gap: 0%;
@@ -67,7 +67,7 @@ main{
     flex-direction: row;
     flex-flow: row;
     align-items: stretch;
-    flex: nowrap;
+    flex-wrap: nowrap;
 }
 article{
     max-width: 50%;
