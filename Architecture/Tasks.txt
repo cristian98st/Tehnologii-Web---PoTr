@@ -1,0 +1,17 @@
+Alexandru Putanu 
+	- poem posting
+	- annotations
+	- anout us (page)
+	- feed (page)
+	- my poems (page)
+	- user's info (page)
+	- sign up
+
+Cristian Tugui
+	- data abse (create)
+	- upvotes/downvotes
+	- comments
+	- notifications
+	- subscribitions
+	- news (page)
+	- sign in
