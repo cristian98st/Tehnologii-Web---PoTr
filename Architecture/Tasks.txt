@@ -8,7 +8,7 @@ Alexandru Putanu
 	- sign up
 
 Cristian Tugui
-	- data abse (create)
+	- data base (create)
 	- upvotes/downvotes
 	- comments
 	- notifications
