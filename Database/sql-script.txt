@@ -44,7 +44,7 @@ CREATE OR REPLACE TABLE translated_poems ( poem_id INT PRIMARY KEY AUTO_INCREMEN
  created_at DATE NOT NULL ,
  updated_at DATE NOT NULL ,
 FOREIGN KEY (uploader_id) REFERENCES users(id),
-FOREIGN KEY (original_id) REFERENCES poems(poem_id) ENGINE=InnoDB;
+FOREIGN KEY (original_id) REFERENCES poems(poem_id)) ENGINE=InnoDB;
 
 CREATE OR REPLACE TABLE comments ( comment_id INT PRIMARY KEY AUTO_INCREMENT ,
  user_id INT NOT NULL,
@@ -61,5 +61,17 @@ CREATE OR REPLACE TABLE translates ( original_poem_id INT NOT NULL,
 PRIMARY KEY (original_poem_id, translated_poem_id),
 FOREIGN KEY (original_poem_id) REFERENCES poems(poem_id),
 FOREIGN KEY (translated_poem_id) REFERENCES translated_poems(poem_id)) ENGINE=InnoDB;
+
+DELIMITER $$
+CREATE OR REPLACE TRIGGER add_translates
+AFTER INSERT ON translated_poems
+FOR EACH ROW
+BEGIN
+	INSERT INTO translates SET original_poem_id = NEW.original_id, translated_poem_id = NEW.poem_id;
+END $$
+
+delimiter ;
+
+delimiter ;
 
 commit;
