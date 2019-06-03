@@ -8,10 +8,10 @@ Alexandru Putanu
 	- sign up
 
 Cristian Tugui
-	- data base (create)
-	- upvotes/downvotes
-	- comments
-	- notifications
-	- subscribitions
-	- news (page)
-	- sign in
+	- data base (create)-V
+	- upvotes/downvotes--X
+	- comments-----------X
+	- notifications------X
+	- subscribitions-----X
+	- news (page)--------X
+	- sign in -----------V
