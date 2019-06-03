@@ -33,6 +33,7 @@ CREATE OR REPLACE TABLE annotations ( annotation_id INT PRIMARY KEY AUTO_INCREME
 FOREIGN KEY (poem_id) REFERENCES poems(poem_id)) ENGINE=InnoDB;
 
 CREATE OR REPLACE TABLE translated_poems ( poem_id INT PRIMARY KEY AUTO_INCREMENT ,
+ original_id INT NOT NULL,
  language VARCHAR(30) NOT NULL,
  title VARCHAR(30) NOT NULL,
  author VARCHAR(30),
@@ -42,7 +43,8 @@ CREATE OR REPLACE TABLE translated_poems ( poem_id INT PRIMARY KEY AUTO_INCREMEN
  uploader_id INT NOT NULL,
  created_at DATE NOT NULL ,
  updated_at DATE NOT NULL ,
-FOREIGN KEY (uploader_id) REFERENCES users(id)) ENGINE=InnoDB;
+FOREIGN KEY (uploader_id) REFERENCES users(id),
+FOREIGN KEY (original_id) REFERENCES poems(poem_id) ENGINE=InnoDB;
 
 CREATE OR REPLACE TABLE comments ( comment_id INT PRIMARY KEY AUTO_INCREMENT ,
  user_id INT NOT NULL,
