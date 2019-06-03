@@ -17,7 +17,7 @@ FOREIGN KEY (subscriber_id) REFERENCES users(id)) ENGINE=InnoDB;
 
 CREATE TABLE poems ( poem_id INT PRIMARY KEY AUTO_INCREMENT ,
  title VARCHAR(30) NOT NULL,
- author VARCHAR(30) NOT NULL,
+ author VARCHAR(30),
  body VARCHAR(30) NOT NULL,
  uploader_id INT NOT NULL,
  created_at INT NOT NULL ,
@@ -34,7 +34,7 @@ FOREIGN KEY (poem_id) REFERENCES poems(poem_id)) ENGINE=InnoDB;
 
 CREATE TABLE translated_poems ( poem_id INT PRIMARY KEY AUTO_INCREMENT ,
  title VARCHAR(30) NOT NULL,
- author VARCHAR(30) NOT NULL,
+ author VARCHAR(30),
  upvotes INT,
  downvotes INT,
  body VARCHAR(30) NOT NULL,
