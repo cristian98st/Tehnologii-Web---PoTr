@@ -8,8 +8,8 @@ ALTER TABLE `users` ADD `updated_at` DATE NOT NULL AFTER `created_at`;
 
 CREATE OR REPLACE TABLE subscribers ( user_id INT NOT NULL ,
  subscriber_id INT NOT NULL ,
- created_at INT NOT NULL ,
- updated_at INT NOT NULL ,
+ created_at DATE NOT NULL ,
+ updated_at DATE NOT NULL ,
 PRIMARY KEY (user_id, subscriber_id),
 FOREIGN KEY (user_id) REFERENCES users(id),
 FOREIGN KEY (subscriber_id) REFERENCES users(id)) ENGINE=InnoDB;
@@ -20,16 +20,16 @@ CREATE OR REPLACE TABLE poems ( poem_id INT PRIMARY KEY AUTO_INCREMENT ,
  author VARCHAR(30),
  body VARCHAR(10000) NOT NULL,
  uploader_id INT NOT NULL,
- created_at INT NOT NULL ,
- updated_at INT NOT NULL ,
+ created_at DATE NOT NULL ,
+ updated_at DATE NOT NULL ,
 FOREIGN KEY (uploader_id) REFERENCES users(id)) ENGINE=InnoDB;
 
 CREATE OR REPLACE TABLE annotations ( annotation_id INT PRIMARY KEY AUTO_INCREMENT ,
  poem_id INT NOT NULL,
  verse_number INT NOT NULL,
  body VARCHAR(300) NOT NULL,
- created_at INT NOT NULL ,
- updated_at INT NOT NULL ,
+ created_at DATE NOT NULL ,
+ updated_at DATE NOT NULL ,
 FOREIGN KEY (poem_id) REFERENCES poems(poem_id)) ENGINE=InnoDB;
 
 CREATE OR REPLACE TABLE translated_poems ( poem_id INT PRIMARY KEY AUTO_INCREMENT ,
@@ -40,8 +40,8 @@ CREATE OR REPLACE TABLE translated_poems ( poem_id INT PRIMARY KEY AUTO_INCREMEN
  downvotes INT,
  body VARCHAR(10000) NOT NULL,
  uploader_id INT NOT NULL,
- created_at INT NOT NULL ,
- updated_at INT NOT NULL ,
+ created_at DATE NOT NULL ,
+ updated_at DATE NOT NULL ,
 FOREIGN KEY (uploader_id) REFERENCES users(id)) ENGINE=InnoDB;
 
 CREATE OR REPLACE TABLE comments ( comment_id INT PRIMARY KEY AUTO_INCREMENT ,
@@ -49,8 +49,8 @@ CREATE OR REPLACE TABLE comments ( comment_id INT PRIMARY KEY AUTO_INCREMENT ,
  poem_id INT NOT NULL,
  body VARCHAR(30) NOT NULL,
  upvotes INT,
- created_at INT NOT NULL ,
- updated_at INT NOT NULL ,
+ created_at DATE NOT NULL ,
+ updated_at DATE NOT NULL ,
 FOREIGN KEY (user_id) REFERENCES users(id),
 FOREIGN KEY (poem_id) REFERENCES translated_poems(poem_id)) ENGINE=InnoDB;
 
