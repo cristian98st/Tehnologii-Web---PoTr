@@ -1,4 +1,4 @@
-CREATE TABLE `potr`.`users` ( `id` INT(4) INT AUTO_INCREMENT PRIMARY KEY ,
+CREATE OR REPLACE TABLE `potr`.`users` ( `id` INT AUTO_INCREMENT PRIMARY KEY ,
  `username` VARCHAR(30) NOT NULL ,
  `email` VARCHAR(30) NOT NULL ,
  `password` VARCHAR(30) NOT NULL);
@@ -6,7 +6,7 @@ CREATE TABLE `potr`.`users` ( `id` INT(4) INT AUTO_INCREMENT PRIMARY KEY ,
 ALTER TABLE `users` ADD `created_at` DATE NOT NULL AFTER `password`;
 ALTER TABLE `users` ADD `updated_at` DATE NOT NULL AFTER `created_at`;
 
-CREATE TABLE subscribers ( user_id INT NOT NULL ,
+CREATE OR REPLACE TABLE subscribers ( user_id INT NOT NULL ,
  subscriber_id INT NOT NULL ,
  created_at INT NOT NULL ,
  updated_at INT NOT NULL ,
@@ -15,16 +15,16 @@ FOREIGN KEY (user_id) REFERENCES users(id),
 FOREIGN KEY (subscriber_id) REFERENCES users(id)) ENGINE=InnoDB;
 
 
-CREATE TABLE poems ( poem_id INT PRIMARY KEY AUTO_INCREMENT ,
+CREATE OR REPLACE TABLE poems ( poem_id INT PRIMARY KEY AUTO_INCREMENT ,
  title VARCHAR(30) NOT NULL,
  author VARCHAR(30),
- body VARCHAR(1000) NOT NULL,
+ body VARCHAR(10000) NOT NULL,
  uploader_id INT NOT NULL,
  created_at INT NOT NULL ,
  updated_at INT NOT NULL ,
 FOREIGN KEY (uploader_id) REFERENCES users(id)) ENGINE=InnoDB;
 
-CREATE TABLE annotations ( annotation_id INT PRIMARY KEY AUTO_INCREMENT ,
+CREATE OR REPLACE TABLE annotations ( annotation_id INT PRIMARY KEY AUTO_INCREMENT ,
  poem_id INT NOT NULL,
  verse_number INT NOT NULL,
  body VARCHAR(300) NOT NULL,
@@ -32,19 +32,19 @@ CREATE TABLE annotations ( annotation_id INT PRIMARY KEY AUTO_INCREMENT ,
  updated_at INT NOT NULL ,
 FOREIGN KEY (poem_id) REFERENCES poems(poem_id)) ENGINE=InnoDB;
 
-CREATE TABLE translated_poems ( poem_id INT PRIMARY KEY AUTO_INCREMENT ,
+CREATE OR REPLACE TABLE translated_poems ( poem_id INT PRIMARY KEY AUTO_INCREMENT ,
  language VARCHAR(30) NOT NULL,
  title VARCHAR(30) NOT NULL,
  author VARCHAR(30),
  upvotes INT,
  downvotes INT,
- body VARCHAR(1000) NOT NULL,
+ body VARCHAR(10000) NOT NULL,
  uploader_id INT NOT NULL,
  created_at INT NOT NULL ,
  updated_at INT NOT NULL ,
 FOREIGN KEY (uploader_id) REFERENCES users(id)) ENGINE=InnoDB;
 
-CREATE TABLE comments ( comment_id INT PRIMARY KEY AUTO_INCREMENT ,
+CREATE OR REPLACE TABLE comments ( comment_id INT PRIMARY KEY AUTO_INCREMENT ,
  user_id INT NOT NULL,
  poem_id INT NOT NULL,
  body VARCHAR(30) NOT NULL,
@@ -54,8 +54,10 @@ CREATE TABLE comments ( comment_id INT PRIMARY KEY AUTO_INCREMENT ,
 FOREIGN KEY (user_id) REFERENCES users(id),
 FOREIGN KEY (poem_id) REFERENCES translated_poems(poem_id)) ENGINE=InnoDB;
 
-CREATE TABLE translates ( original_poem_id INT NOT NULL,
+CREATE OR REPLACE TABLE translates ( original_poem_id INT NOT NULL,
  translated_poem_id INT NOT NULL,
 PRIMARY KEY (original_poem_id, translated_poem_id),
 FOREIGN KEY (original_poem_id) REFERENCES poems(poem_id),
 FOREIGN KEY (translated_poem_id) REFERENCES translated_poems(poem_id)) ENGINE=InnoDB;
+
+commit;
