@@ -153,6 +153,25 @@ main {
     border-radius: 4px;
 }
 
+textarea {
+    width: 50%;
+    height: 80px;
+    background-color: #fff;
+    resize: none;
+    margin-left: 25%;
+    border-color: #ddd;
+}
+
+.submit {
+    margin-left: 25%;
+    width: 100px;
+    height: 30px;
+    background-color: #197bbd;
+    border: none;
+    color: #f1f1f1;
+    cursor: pointer;
+}
+
 @media screen and (max-width: 600px) {
     .topnav a, .toprow{
       float: none;
