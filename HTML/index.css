@@ -129,6 +129,30 @@ main {
     order: 0;
 }
 
+.poem_title {
+    text-align: center;
+}
+
+.poem_author {
+    text-align: right;
+    font-weight: bold;
+    margin-right: 10%;
+}
+
+.poem_body {
+    text-align: left;
+    margin-left: 20%;
+}
+
+.poem_box {
+    width: 50%;
+    align-self: center;
+    padding: 20px;
+    margin-bottom: 4px;
+    background-color: #ece8c5;
+    border-radius: 4px;
+}
+
 @media screen and (max-width: 600px) {
     .topnav a, .toprow{
       float: none;

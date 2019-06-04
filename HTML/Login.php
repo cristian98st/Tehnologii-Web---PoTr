@@ -1,6 +1,6 @@
 <?php
     include 'dba.inc.php';
-    include 'functions.inc.php';
+    include 'login.inc.php';
     session_start();
 ?>
 

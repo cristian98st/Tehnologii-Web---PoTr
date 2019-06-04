@@ -5,4 +5,6 @@
         die("Connection failed: " . mysqli_connect_error());
     }
 
+    $connection->set_charset("utf8");
+
 ?>
