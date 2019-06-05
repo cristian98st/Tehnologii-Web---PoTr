@@ -202,6 +202,12 @@ textarea {
     font-weight: 100;
 }
 
+.pagination {
+    margin-left: auto;
+    margin-right: auto;
+    width: 8em;
+}
+
 @media screen and (max-width: 600px) {
     .topnav a, .toprow{
       float: none;

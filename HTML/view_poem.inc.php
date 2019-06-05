@@ -90,7 +90,25 @@ function setComments($conn) {
 }
 
 function getComments($conn){
+
+    $results_per_page = 5;
+
     $sql = "SELECT * FROM comments WHERE poem_id = '".$_SESSION['poem_id']."'";
+    $result = $conn->query($sql);
+    $number_of_results = mysqli_num_rows($result);
+
+    $number_of_pages = ceil($number_of_results/$results_per_page);
+
+    if(!isset($_GET['page'])){
+        $page=1;
+    } else {
+        $page = $_GET['page'];
+    }
+
+    $this_page_first_result = ($page-1)*$results_per_page;
+
+
+    $sql = "SELECT * FROM comments WHERE poem_id = '".$_SESSION['poem_id']."' LIMIT ".$this_page_first_result.",".$results_per_page;
     $result = $conn->query($sql);
 
     while($row = $result->fetch_assoc()){
@@ -102,5 +120,17 @@ function getComments($conn){
                 .nl2br($row['body']).
              "</p></div>";
     }
+    
+    // links to the page
+
+    $pagination = "<p class='pagination'>";
+    for($page=1;$page<=$number_of_pages;$page++){
+        $pagination .= "<a href = 'view_poem.php?poem_name=".$_GET['poem_name']."&id=".$_GET['id']."&page=".$page."'>".$page."</a>";
+        $pagination .= ">";
+    }
+    $pagination = substr($pagination, 0, -1);
+    $pagination .= "</p>";
+    
+    echo $pagination;
 }
 ?>
