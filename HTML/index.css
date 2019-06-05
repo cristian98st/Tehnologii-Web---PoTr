@@ -127,6 +127,7 @@ main {
     border-left: 5px solid #ece8c5;
     border-right: 5px solid #ece8c5;
     order: 0;
+    max-width: 60%;
 }
 
 .poem_title {
@@ -154,22 +155,24 @@ main {
 }
 
 textarea {
-    width: 50%;
+    width: 70%;
     height: 80px;
     background-color: #fff;
     resize: none;
-    margin-left: 25%;
+    margin-left: 15%;
+    /* align-self: center; */
     border-color: #ddd;
 }
 
-.submit {
-    margin-left: 25%;
+.commentSubmit {
+    margin-left: 15%;
     width: 100px;
     height: 30px;
     background-color: #197bbd;
     border: none;
     color: #f1f1f1;
     cursor: pointer;
+    margin-bottom: 40px;
 }
 
 .language {
@@ -180,6 +183,23 @@ textarea {
 .uploader {
     font-size: 80%;
     font-style: italic;
+}
+
+.comments_box{
+    align-self: center;
+    width: 80%;
+    padding: 20px;
+    margin-bottom: 4px;
+    background-color: #fff;
+    border-radius: 4px;
+}
+
+.comments_box p {
+    font-family: Arial;
+    font-size: 14px;
+    line-height: 16px;
+    color: #282828;
+    font-weight: 100;
 }
 
 @media screen and (max-width: 600px) {

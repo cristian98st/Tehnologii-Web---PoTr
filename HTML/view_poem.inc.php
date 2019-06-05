@@ -71,7 +71,7 @@ function setCommentBox($conn) {
                 <input type='hidden' name='userid' value='1'>
                 <input type='hidden' name='date' value='".date('Y-m-d H:i:s')."'>
                 <textarea name='message'></textarea> <br>
-                <button class='submit' name='commentSubmit' type='submit'>Comment</button>
+                <button class='commentSubmit' name='commentSubmit' type='submit'>Comment</button>
             </form>";
 }
 
@@ -81,6 +81,7 @@ function setComments($conn) {
         $date = $_POST['date'];
         $poemID = $_SESSION['poem_id'];
         $message = $_POST['message'];
+        $message = $conn->real_escape_string($message);
 
         $sql = "INSERT INTO comments(user_id, poem_id, body, created_at, updated_at) VALUES('$userid', '$poemID', '$message', '$date', '$date')";
         $result = $conn->query($sql);
@@ -89,6 +90,17 @@ function setComments($conn) {
 }
 
 function getComments($conn){
+    $sql = "SELECT * FROM comments WHERE poem_id = '".$_SESSION['poem_id']."'";
+    $result = $conn->query($sql);
 
+    while($row = $result->fetch_assoc()){
+        echo "<div class='comments_box'><p>"
+                .getUploader($conn, $row['user_id']).
+             "<br>"
+                .$row['created_at'].
+             "<br><br>"
+                .nl2br($row['body']).
+             "</p></div>";
+    }
 }
 ?>
