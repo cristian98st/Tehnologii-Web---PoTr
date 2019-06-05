@@ -68,7 +68,7 @@ function getUploader($conn, $id){
 
 function setCommentBox($conn) {
     echo "<br><br><form method = 'POST' action='".setComments($conn)."'>
-                <input type='hidden' name='userid' value='1'>
+                <input type='hidden' name='userid' value='".$_SESSION['id']."'>
                 <input type='hidden' name='date' value='".date('Y-m-d H:i:s')."'>
                 <textarea name='message'></textarea> <br>
                 <button class='commentSubmit' name='commentSubmit' type='submit'>Comment</button>
@@ -118,7 +118,15 @@ function getComments($conn){
                 .$row['created_at'].
              "<br><br>"
                 .nl2br($row['body']).
-             "</p></div>";
+             "</p>
+             <form class='editForm' method='POST' action='editComment.php'>
+                <input type='hidden' name='comment_id' value='".$row['comment_id']."'>
+                <input type='hidden' name='userid' value='".$row['user_id']."'>
+                <input type='hidden' name='date' value='".date('Y-m-d H:i:s')."'>
+                <input type='hidden' name='message' value='".$row['body']."'>
+                <button>Edit</button>
+             </form>
+             </div>";
     }
     
     // links to the page
@@ -132,5 +140,30 @@ function getComments($conn){
     $pagination .= "</p>";
     
     echo $pagination;
+}
+
+function editComment($conn){
+    if(isset($_POST['commentEdit'])){
+        $comment_id = $_POST['comment_id'];
+        $userid = $_POST['userid'];
+        $date = $_POST['date'];
+        $message = $_POST['message'];
+
+        $sql = "UPDATE comments SET body = '$message', updated_at='".date('Y-m-d')."' WHERE comment_id = $comment_id";
+        $result = $conn->query($sql);
+        echo mysqli_error($conn);
+
+
+        $poem = getPoemByID($conn, $_SESSION['poem_id']);
+
+        header("Location: view_poem.php?poem_name=".$poem['title']."&id=".$poem['uploader_id']);
+    }
+}
+
+function getPoemByID($conn, $id){
+    $sql = "SELECT * FROM translated_poems WHERE poem_id = '$id'";
+    $result=$conn->query($sql);
+    $row = $result->fetch_assoc();
+    return $row;
 }
 ?>

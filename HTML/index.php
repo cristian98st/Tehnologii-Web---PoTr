@@ -17,7 +17,7 @@
         <div class="topright-off">
                 <a href="signup.html">Sign up</a>
                 <a> | </a>
-                <a href="login.html">Sign in</a>
+                <a href="Login.html">Sign in</a>
         </div>
     </div>
 
@@ -34,7 +34,11 @@
             <h2>
                 Welcome to the Homepage.
             </h2>
-            <p>This is the homepage.</p>
+            <p>This is the homepage.
+            <!-- test -->
+            <a href = "view_poem.php?poem_name=Drowsy%20birds&id=2">Bau</a>;
+            <!-- finish test -->
+            </p>
         </div>
         <div class="emptybox"></div>
     </main>

@@ -14,8 +14,9 @@
                     exit();
                 }
             } else {
-                // header("Location: index.php?loginfailed");
-                // exit();
+                $_SESSION['id'] = -1;
+                header("Location: index.php?loginfailed");
+                exit();
 
                 echo "failed";
             }
