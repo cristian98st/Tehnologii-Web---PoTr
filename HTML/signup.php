@@ -6,7 +6,6 @@
     <title>Sign up</title>
     <link rel="stylesheet" href="signup.css">
 </head>
-
 <body>
         <form class="modal-content">
             <div class="container">
@@ -32,8 +31,30 @@
               </div>
             </div>
           </form> 
-
-
 </body>
-
 </html>
+<?php
+  if(isset($_GET['email']) and !empty($_GET['code'])
+      and isset($_GET['month']) and !empty($_GET['month'])){
+      $code = htmlspecialchars($_GET['code']);
+      $month = htmlspecialchars($_GET['month']);
+      $holidays = json_decode(
+          file_get_contents('https://date.nager.at/api/v2/publicholidays/'.date('Y').'/'. $code),
+          true);
+      $count = 0;
+      foreach ($holidays as $holiday){
+          $date = explode("-", $holiday['date']);
+          $my_month = $date[1];
+          if((int)$my_month == (int)$month){
+              echo $holiday['localName'] . ' on '. $holiday['date'] . '<br>';
+              $count = $count +1;
+          }
+      }
+      if($count == 0){
+          echo 'Nu exista sarbatori pentru '. $code . ' in luna '. $month;
+      }
+  }
+  else{
+      echo 'astept input corect';
+  }
+?>
