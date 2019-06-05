@@ -172,6 +172,16 @@ textarea {
     cursor: pointer;
 }
 
+.language {
+    text-align: center;
+    font-style: italic;
+}
+
+.uploader {
+    font-size: 80%;
+    font-style: italic;
+}
+
 @media screen and (max-width: 600px) {
     .topnav a, .toprow{
       float: none;

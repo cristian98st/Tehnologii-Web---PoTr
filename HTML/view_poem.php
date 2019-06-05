@@ -2,6 +2,7 @@
 date_default_timezone_set('Europe/Bucharest');
 include "dba.inc.php";
 include "view_poem.inc.php";
+session_start();
 ?>
 
 
@@ -29,7 +30,7 @@ include "view_poem.inc.php";
     </div>
     <div class="topnav">
         <a href="index.html">Home</a>
-        <a class="active" href="news.html">News</a>
+        <a href="news.html">News</a>
         <a href="feed.html">Feed</a>
         <a href="aboutus.html">About us</a>
     </div>
@@ -43,12 +44,10 @@ include "view_poem.inc.php";
                 ?>
             </div>
             <?php
-            echo "<br><br><form>
-                <input type='hidden' name='userid' value='Anonymous'>
-                <input type='hidden' name='date' value='".date('Y-m-d H:i:s')."'>
-                <textarea name='message'></textarea> <br>
-                <button class='submit' name='submit' type='submit'>Comment</button>
-            </form>";
+            if($_SESSION['translated'] == true){
+                setCommentBox($connection);
+                getComments($connection);
+            }
             ?>
         </div>
         <div class="emptybox"></div>
