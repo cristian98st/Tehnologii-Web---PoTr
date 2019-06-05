@@ -118,15 +118,24 @@ function getComments($conn){
                 .$row['created_at'].
              "<br><br>"
                 .nl2br($row['body']).
-             "</p>
-             <form class='editForm' method='POST' action='editComment.php'>
-                <input type='hidden' name='comment_id' value='".$row['comment_id']."'>
-                <input type='hidden' name='userid' value='".$row['user_id']."'>
-                <input type='hidden' name='date' value='".date('Y-m-d H:i:s')."'>
-                <input type='hidden' name='message' value='".$row['body']."'>
-                <button>Edit</button>
-             </form>
-             </div>";
+             "</p>";
+        if($_SESSION['id'] == $row['user_id'] || $_SESSION['id'] == -2){
+            echo "<form class='deleteForm' method='POST' action='".deleteComment($conn)."'>
+                    <input type='hidden' name='comment_id' value='".$row['comment_id']."'>
+                    <button name='commentDelete' type='submit'>Delete</button>
+                </form>
+                <form class='editForm' method='POST' action='editComment.php'>
+                    <input type='hidden' name='comment_id' value='".$row['comment_id']."'>
+                    <input type='hidden' name='userid' value='".$row['user_id']."'>
+                    <input type='hidden' name='date' value='".date('Y-m-d H:i:s')."'>
+                    <input type='hidden' name='message' value='".$row['body']."'>
+                    <button>Edit</button>
+                </form>
+                </div>";
+        }
+        else {
+            echo "</div>";
+        }
     }
     
     // links to the page
@@ -149,6 +158,8 @@ function editComment($conn){
         $date = $_POST['date'];
         $message = $_POST['message'];
 
+        $message = $message."\n<br><br><i> Edited by: ".getUploader($conn,$_SESSION['id'])." on ".date('Y-m-d H:i:s').". </i>";
+
         $sql = "UPDATE comments SET body = '$message', updated_at='".date('Y-m-d')."' WHERE comment_id = $comment_id";
         $result = $conn->query($sql);
         echo mysqli_error($conn);
@@ -165,5 +176,20 @@ function getPoemByID($conn, $id){
     $result=$conn->query($sql);
     $row = $result->fetch_assoc();
     return $row;
+}
+
+function deleteComment($conn){
+    if(isset($_POST['commentDelete'])){
+        $comment_id = $_POST['comment_id'];
+
+        $sql = "DELETE FROM comments WHERE comment_id = $comment_id";
+        $result = $conn->query($sql);
+        echo mysqli_error($conn);
+
+
+        $poem = getPoemByID($conn, $_SESSION['poem_id']);
+
+        header("Location: view_poem.php?poem_name=".$poem['title']."&id=".$poem['uploader_id']);
+    }
 }
 ?>

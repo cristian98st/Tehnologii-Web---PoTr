@@ -44,13 +44,14 @@ session_start();
                 $userid = $_POST['userid'];
                 $date = $_POST['date'];
                 $message = $_POST['message'];
+                $message = substr($message, 0, strrpos($message, "\n"));
 
                 echo "<br><br><form method = 'POST' action='".editComment($connection)."'>
                 <input type='hidden' name='userid' value='".$userid."'>
                 <input type='hidden' name='comment_id' value='".$comment_id."'>
                 <input type='hidden' name='date' value='".date("Y-m-d H:i:s")."'>
                 <textarea name='message'>".$message."</textarea> <br>
-                <button class='commentSubmit' name='commentEdit' type='edit'>Edit</button>
+                <button class='commentSubmit' name='commentEdit' type='submit'>Edit</button>
             </form>";
                 editComment($connection);
                 ?>
