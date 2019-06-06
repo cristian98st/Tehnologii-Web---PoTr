@@ -9,8 +9,8 @@ Alexandru Putanu
 
 Cristian Tugui
 	- data base (create)-V
-	- upvotes/downvotes--X
-	- comments-----------X
+	- upvotes/downvotes--V
+	- comments-----------V
 	- notifications------X
 	- subscribitions-----X
 	- news (page)--------X

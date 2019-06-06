@@ -1,17 +1,12 @@
 <?php
-date_default_timezone_set('Europe/Bucharest');
-include "dba.inc.php";
-include "comments.inc.php";
-include "translated_poem.inc.php";
 session_start();
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en-US">
 
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
     <title>Potter</title>
     <link rel="stylesheet" href="index.css">
 </head>
@@ -45,7 +40,7 @@ session_start();
     if(isset($_SESSION['id']) && $_SESSION['id'] != -1){
         echo '<div class="topnav">
         <a href="index.php">Home</a>
-        <a href="news.php">News</a>
+        <a class="active" href="news.php">News</a>
         <a href="feed-on.html">Feed</a>
         <a href="add_poem.html">Add your poem</a>
         <a href="my_poems.html">My poems</a>
@@ -54,7 +49,7 @@ session_start();
     } else {
         echo '<div class="topnav">
             <a href="index.html">Home</a>
-            <a href="news.php">News</a>
+            <a class="active" href="news.php">News</a>
             <a href="feed.html">Feed</a>
             <a href="aboutus.html">About us</a>
         </div>';
@@ -65,17 +60,11 @@ session_start();
     <main class="content">
         <div class="emptybox"></div>
         <div class="items">
-            <!-- body -->
-            <div class="poem_box">
-                <?php
-                getPoem($connection);
-                ?>
-            </div>
+            <h2>
+                Newspage
+            </h2>
             <?php
-            if($_SESSION['translated'] == true){
-                setCommentBox($connection);
-                getComments($connection);
-            }
+            echo "TODO";
             ?>
         </div>
         <div class="emptybox"></div>

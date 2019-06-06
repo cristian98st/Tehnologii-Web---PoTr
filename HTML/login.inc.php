@@ -10,12 +10,12 @@
             if(mysqli_num_rows($result) == 1){
                 if($row = $result->fetch_assoc()){
                     $_SESSION['id'] = $row['id'];
-                    header("Location: index.php?loginsuccess");
+                    header("Location: index.php?login=success");
                     exit();
                 }
             } else {
                 $_SESSION['id'] = -1;
-                header("Location: index.php?loginfailed");
+                header("Location: index.php?login=failed");
                 exit();
 
                 echo "failed";
