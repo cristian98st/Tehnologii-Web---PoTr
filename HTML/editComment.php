@@ -1,7 +1,8 @@
 <?php
 date_default_timezone_set('Europe/Bucharest');
 include "dba.inc.php";
-include "view_poem.inc.php";
+include "comments.inc.php";
+include "translated_poem.inc.php";
 session_start();
 ?>
 
@@ -44,7 +45,11 @@ session_start();
                 $userid = $_POST['userid'];
                 $date = $_POST['date'];
                 $message = $_POST['message'];
-                $message = substr($message, 0, strrpos($message, "\n"));
+
+
+                if(strstr($message, "<br><br>"))
+                    $message = substr($message, 0, strrpos($message, "\n")); 
+
 
                 echo "<br><br><form method = 'POST' action='".editComment($connection)."'>
                 <input type='hidden' name='userid' value='".$userid."'>

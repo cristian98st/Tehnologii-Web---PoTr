@@ -1,7 +1,8 @@
 <?php
 date_default_timezone_set('Europe/Bucharest');
 include "dba.inc.php";
-include "view_poem.inc.php";
+include "comments.inc.php";
+include "translated_poem.inc.php";
 session_start();
 ?>
 

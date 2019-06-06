@@ -1,72 +1,10 @@
 <?php
-function getPoem($conn){
-    $isTranslated = FALSE;
-    $title = $_GET['poem_name'];
-    $uploaderID = $_GET['id'];
-
-    
-    $sql_poem= "SELECT * FROM poems WHERE title = '$title' AND uploader_id = '$uploaderID'";
-    $sql_translatedPoem = "SELECT * FROM translated_poems WHERE title = '$title' AND uploader_id = '$uploaderID'";
-    $result_poem = $conn->query($sql_poem);
-
-    $username = getUploader($conn, $uploaderID);
-
-    if($result_poem->num_rows < 1){
-        $result_poem = $conn->query($sql_translatedPoem);
-        $isTranslated = TRUE;
-    }
-    
-    $row = $result_poem->fetch_assoc();
-    if($isTranslated == FALSE){
-        $_SESSION['translated'] = false;
-        $_SESSION['poem_id'] = $row['poem_id'];
-        echo "
-            <p class='uploader'> Uploader:"
-                .$username.
-            "</p></p>
-            <h2 class='poem_title'>"
-                .$row['title'].
-            "</h2>
-            <p class='poem_author'>"
-                .$row['author'].
-            "</p>
-            <br>
-            <p class='poem_body'>"
-                .nl2br($row['body']).
-            "</p>";
-    } else {
-        $_SESSION['translated'] = true;
-        $_SESSION['poem_id'] = $row['poem_id'];
-        echo "
-            <p class='uploader'> Uploader: "
-                .$username.
-            "</p>
-            <h2 class='poem_title'>"
-                .$row['title'].
-            "</h2>
-            <p class='language'>-"
-                .$row['language'].
-            "-</p>
-            <p class='poem_author'>"
-                .$row['author'].
-            "</p>
-            <br>
-            <p class='poem_body'>"
-                .nl2br($row['body']).
-            "</p>";
-    }
-}
-
-function getUploader($conn, $id){
-    $sql = "SELECT username FROM users WHERE id = '$id'";
-
-    $result = $conn->query($sql);
-
-    $rtnValaue = $result->fetch_assoc();
-    return $rtnValaue['username'];
-}
 
 function setCommentBox($conn) {
+    if(!isset($_SESSION['id'])){
+        $_SESSION['id']=-1;
+    }
+
     echo "<br><br><form method = 'POST' action='".setComments($conn)."'>
                 <input type='hidden' name='userid' value='".$_SESSION['id']."'>
                 <input type='hidden' name='date' value='".date('Y-m-d H:i:s')."'>
@@ -119,7 +57,7 @@ function getComments($conn){
              "<br><br>"
                 .nl2br($row['body']).
              "</p>";
-        if($_SESSION['id'] == $row['user_id'] || $_SESSION['id'] == -2){
+        if(($_SESSION['id'] == $row['user_id'] || $_SESSION['id'] == -2) && $_SESSION['id'] != -1){
             echo "<form class='deleteForm' method='POST' action='".deleteComment($conn)."'>
                     <input type='hidden' name='comment_id' value='".$row['comment_id']."'>
                     <button name='commentDelete' type='submit'>Delete</button>
@@ -130,12 +68,19 @@ function getComments($conn){
                     <input type='hidden' name='date' value='".date('Y-m-d H:i:s')."'>
                     <input type='hidden' name='message' value='".$row['body']."'>
                     <button>Edit</button>
-                </form>
-                </div>";
+                </form>";
         }
-        else {
-            echo "</div>";
+        
+        if($_SESSION['id']!=-1 && $_SESSION['id']!=-2){
+            echo "<form class='upvote' method='POST' action='".upvoteComment($conn, $row)."'>
+                    <input type='hidden' name='comment_id' value='".$row['comment_id']."'>
+                    <input type='hidden' name='upvotes' value='".$row['upvotes']."'>
+                    <button class='upvoteComment' name='upvoteComment' type='submit'></button>
+                </form>";
+            getUpvotes($conn, $row);
         }
+
+        echo "</div>";
     }
     
     // links to the page
@@ -171,13 +116,6 @@ function editComment($conn){
     }
 }
 
-function getPoemByID($conn, $id){
-    $sql = "SELECT * FROM translated_poems WHERE poem_id = '$id'";
-    $result=$conn->query($sql);
-    $row = $result->fetch_assoc();
-    return $row;
-}
-
 function deleteComment($conn){
     if(isset($_POST['commentDelete'])){
         $comment_id = $_POST['comment_id'];
@@ -191,5 +129,26 @@ function deleteComment($conn){
 
         header("Location: view_poem.php?poem_name=".$poem['title']."&id=".$poem['uploader_id']);
     }
+}
+
+function upvoteComment($conn, $comment){
+    if(isset($_POST['upvoteComment'])){
+        $upvotes = $_POST['upvotes'];
+        $comment_id = $_POST['comment_id'];
+
+        if($upvotes==NULL)
+            $sql = "UPDATE comments SET upvotes = 1 WHERE comment_id = $comment_id";
+        else
+            $sql = "UPDATE comments SET upvotes = $upvotes+1 WHERE comment_id = $comment_id";
+
+        $result = $conn->query($sql);
+
+        $poem = getPoemByID($conn, $_SESSION['poem_id']);
+        header("Location: view_poem.php?poem_name=".$poem['title']."&id=".$poem['uploader_id']);
+    }
+}
+
+function getUpvotes($conn, $comment){
+    echo "<p class='upvotesNoComment'>".$comment['upvotes']."</p>";
 }
 ?>
