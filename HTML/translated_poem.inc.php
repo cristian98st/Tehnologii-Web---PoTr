@@ -54,7 +54,19 @@ function getPoem($conn){
             <br>
             <p class='poem_body'>"
                 .nl2br($row['body']).
-            "</p>";
+            "</p>
+            <form class='upvote' method='POST' action='".upvotePoem($conn, $row)."'>
+                <input type='hidden' name='poem_id' value='".$row['poem_id']."'>
+                <input type='hidden' name='upvotes' value='".$row['upvotes']."'>
+                <button class='upvotePoem' name='upvotePoem' type='submit'></button>
+            </form>
+            <form class='upvote' method='POST' action='".downvotePoem($conn, $row)."'>
+            <input type='hidden' name='poem_id' value='".$row['poem_id']."'>
+            <input type='hidden' name='downvotes' value='".$row['downvotes']."'>
+            <button class='downvotePoem' name='downvotePoem' type='submit'></button>
+            </form>";
+            getPoemUpvotes($conn, $row);
+            getPoemDownvotes($conn, $row);
     }
 }
 
@@ -72,6 +84,52 @@ function getPoemByID($conn, $id){
     $result=$conn->query($sql);
     $row = $result->fetch_assoc();
     return $row;
+}
+
+function upvotePoem($conn, $poem){
+    if($_SESSION['id'] != -1 && $_SESSION['id']!=-2){
+        if(isset($_POST['upvotePoem'])){
+            $upvotes = $_POST['upvotes'];
+            $poem_id = $_POST['poem_id'];
+
+            if($upvotes==NULL)
+                $sql = "UPDATE translated_poems SET upvotes = 1 WHERE poem_id = $poem_id";
+            else
+                $sql = "UPDATE translated_poems SET upvotes = $upvotes+1 WHERE poem_id = $poem_id";
+
+            $result = $conn->query($sql);
+
+            // echo mysqli_error($conn);
+            header("Location: view_poem.php?poem_name=".$poem['title']."&id=".$poem['uploader_id']);
+        }
+    }
+}
+
+function downvotePoem($conn, $poem){
+    if($_SESSION['id'] != -1 && $_SESSION['id']!=-2){
+        if(isset($_POST['downvotePoem'])){
+            $downvotes = $_POST['downvotes'];
+            $poem_id = $_POST['poem_id'];
+
+            if($downvotes==NULL)
+                $sql = "UPDATE translated_poems SET downvotes = 1 WHERE poem_id = $poem_id";
+            else
+                $sql = "UPDATE translated_poems SET downvotes = $downvotes+1 WHERE poem_id = $poem_id";
+
+            $result = $conn->query($sql);
+
+            // echo mysqli_error($conn);
+            header("Location: view_poem.php?poem_name=".$poem['title']."&id=".$poem['uploader_id']);
+        }
+    }
+}
+
+function getPoemUpvotes($conn, $poem){
+    echo "<p class='upvotesNoPoem'>".$poem['upvotes']."</p>";
+}
+
+function getPoemDownvotes($conn, $poem){
+    echo "<p class='downvotesNoPoem'>".$poem['downvotes']."</p>";
 }
 
 ?>
