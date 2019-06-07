@@ -46,11 +46,7 @@ if (
     and isset($_GET['psw-repeat']) and !empty($_GET['psw-repeat'])
     and $_GET['psw']==$_GET['psw-repeat']
     ) {
-        $name = $_GET['user'];
-        $mail = $_GET['email'];
-        $pass1 = $_GET['psw'];
-        $pass2 = $_GET['psw-repeat'];
         require_once('functions.php');
-    add_user($_GET['user'],$_GET['email'],$_GET['psw']);
-}
+        add_user($_GET['user'],$_GET['email'],$_GET['psw']);
+    }   
 ?>
