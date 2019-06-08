@@ -1,4 +1,6 @@
 <?php
+include "user.inc.php";
+include "dba.inc.php";
 session_start();
 ?>
 
@@ -37,8 +39,9 @@ else if($_GET['login'] == "failed")
                         <a href="Login.php">Sign in</a>
                         </div>';
             } else {
+                $user = getUser($connection, $_SESSION['id']);
                 echo '<div class="topright-on">
-                    <a href="user_info.html">User info</a>
+                    <a href="user_info.php">'.$user["username"].'\'s info</a>
                     <a href="index.php?login=failed">Log Out</a>
                     </div>';
             }
