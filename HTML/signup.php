@@ -39,18 +39,14 @@
 
 </html>
 <?php
-$name = $_GET['user'];
-$mail = $_GET['email'];
-$pass1 = $_GET['psw'];
-$pass2 = $_GET['psw-repeat'];
 if (
-    isset($name) and !empty($name)
-    and isset($mail) and !empty($mail)
-    and isset($pass1) and !empty($pass1)
-    and isset($pass2) and !empty($pass2)
-    and $pass1==$pass2
-) {
-    require_once('functions.php');
-    add_user($_GET['user'],$_GET['email'],$_GET['psw']);
-}
+    isset($_GET['user']) and !empty($_GET['user'])
+    and isset($_GET['email']) and !empty($_GET['email'])
+    and isset($_GET['psw']) and !empty($_GET['psw'])
+    and isset($_GET['psw-repeat']) and !empty($_GET['psw-repeat'])
+    and $_GET['psw']==$_GET['psw-repeat']
+    ) {
+        require_once('functions.php');
+        add_user($_GET['user'],$_GET['email'],$_GET['psw']);
+    }   
 ?>

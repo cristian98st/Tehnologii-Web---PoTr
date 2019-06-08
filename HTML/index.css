@@ -70,9 +70,11 @@ img.resize{
 }
 
 .topnav {
+    display: flex;
+    flex-direction: row;
     overflow: hidden;
     background-color: #353531;
-    padding-left: 40%;
+    justify-content: center;
 }
 
 .topnav a {
@@ -81,7 +83,7 @@ img.resize{
     border-right: 2px solid #f3f1e0;
     color: #f3f1e0;
     text-align: center;
-    padding: 14px 19px;
+    padding: 1% 1%;
     font-size: 19px;
     text-decoration: none;
 }
