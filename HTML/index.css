@@ -296,6 +296,37 @@ button {
     right: 20px;
 }
 
+.formNotification {
+    position: relative;
+    font-family: Arial;
+    margin-right: 10px;
+    margin-top: -5px;
+    border:none;
+}
+
+.formNotification select {
+    outline-color: #197bbd;
+    outline: #197bbd;
+    background: transparent;
+    box-shadow: none !important;
+    border: none;
+    font-size: 14px;
+    height: 29px;
+    padding: 5px; /* If you add too much padding here, the options won't show in IE */
+    width: 268px;
+
+    background: url('https://img.icons8.com/material/24/000000/bell.png') no-repeat right center;
+    height: 34px;
+    width: 290px;
+ }
+
+ .formNotification select:focus {
+    background: #197bbd;
+    box-shadow: none !important;
+    border-radius: 0%;
+ }
+
+
 @media screen and (max-width: 600px) {
     .topnav a, .toprow{
       float: none;

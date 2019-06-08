@@ -1,6 +1,8 @@
 <?php
 include "user.inc.php";
 include "dba.inc.php";
+include "notification.inc.php";
+date_default_timezone_set('Europe/Bucharest');
 session_start();
 ?>
 
@@ -11,6 +13,12 @@ if(!isset($_GET['login'])){
 }
 else if($_GET['login'] == "failed")
     $_SESSION['id'] = -1;
+
+if(isset($_GET['last']))
+    if(isset($_GET['id'])){
+        $sql = "UPDATE users SET last_loggin='".$_GET['last']."' WHERE id = ".$_GET['id'];
+        $result = $connection->query($sql);
+    }
 ?>
 
 <!DOCTYPE html>
@@ -26,8 +34,8 @@ else if($_GET['login'] == "failed")
     <div class="toprow">
         <input type="text" placeholder="Search poem...">
         <h1 class="title">
-                <a href="index.html"><img class="resize" src="http://pluspng.com/img-png/feather-pen-png-black-and-white-size-512.png"></a>
-                <span style="font-size: 82px; margin: 21px 0;"><a href="index.html" style="text-decoration:none; color: #f3f1e0">Potter</a></span>
+                <a href="index.php"><img class="resize" src="http://pluspng.com/img-png/feather-pen-png-black-and-white-size-512.png"></a>
+                <span style="font-size: 82px; margin: 21px 0;"><a href="index.php" style="text-decoration:none; color: #f3f1e0">Potter</a></span>
         </h1>
 
         <?php
@@ -40,9 +48,11 @@ else if($_GET['login'] == "failed")
                         </div>';
             } else {
                 $user = getUser($connection, $_SESSION['id']);
-                echo '<div class="topright-on">
-                    <a href="user_info.php">'.$user["username"].'\'s info</a>
-                    <a href="index.php?login=failed">Log Out</a>
+                echo '<div class="topright-on">';
+                initNotificationBox($connection, $user);
+                $logoutPath = "index.php?login=failed&last=".date("Y-m-d")."&id=".$_SESSION['id'];
+                echo '<a href="user_info.php">'.$user["username"].'\'s info</a>
+                    <a href="'.$logoutPath.'">Log Out</a>
                     </div>';
             }
         ?>
