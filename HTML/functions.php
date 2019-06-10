@@ -26,6 +26,18 @@ function add_tpoem($title,$author,$text,$translated,$language){
     }
 }
 
+function get_userinfo(){
+    $mysql = new mysqli ('localhost', 'root','','potr');
+    
+    if (mysqli_connect_errno()) {
+        die ('Conexiunea a esuat...');
+    }
+
+    $sql = 'SELECT * FROM users where id = ' . $_SESSION['id'];
+    $inf = $mysql->query($sql);
+    return $inf;
+}
+
 function add_poem($title,$author,$text,$id){
     $mysql = new mysqli ('localhost', 'root','','potr');
     

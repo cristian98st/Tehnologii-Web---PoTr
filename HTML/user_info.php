@@ -4,10 +4,10 @@
 <head>
     <meta charset="utf-8">
     <title>Potter</title>
-    <link rel="stylesheet" href="index-on.css">
+    <link rel="stylesheet" href="index.css">
 </head>
 
-<body>
+<header>
     <div class="toprow">
         <input type="text" placeholder="Search poem...">
         <h1 href="title">
@@ -27,6 +27,35 @@
         <a href="my_poems.html">My poems</a>
         <a href="aboutus-on.html">About us</a>
     </div>
+</header>
+
+<body>
+    <main class = 'content'>
+    <div class="emptybox"></div>
+    <div class = "items">
+        <h2>
+            Your Info:
+        </h2>
+        <form>
+        <h3>
+            Name:
+        </h3>
+        <?php
+        $_SESSION['id']= 1;
+        require_once('functions.php');
+        $rez = get_userinfo()->fetch_assoc();
+        echo 
+        '<input type="text" name = "n" placeholder="'. $rez['username'] . '">
+        ';
+        ?>
+        </form>    
+    </div>
+
+    <nav>
+
+    <div class="emptybox"></div>
+</main>
+
 </body>
 
 </html>

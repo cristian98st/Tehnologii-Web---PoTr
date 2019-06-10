@@ -141,6 +141,7 @@ img.resize{
     overflow: hidden;
     background-color: #353531;
     justify-content: center;
+    width:100%;
 }
 
 .topnav a {
@@ -190,12 +191,6 @@ main {
     display: flex;
     flex-direction: column;
     flex-grow: 2;
-    min-height: 75.5vh;
-    padding:2%;
-    border-left: 5px solid #ece8c5;
-    border-right: 5px solid #ece8c5;
-    order: 0;
-    max-width: 60%;
 }
 
 .poem_title {
@@ -392,6 +387,9 @@ button {
     border-radius: 0%;
  }
 
+ nav{
+     flex-grow: 1;
+ }
 
 @media screen and (max-width: 600px) {
     .topnav a, .toprow{
