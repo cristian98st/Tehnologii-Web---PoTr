@@ -38,7 +38,7 @@ $subs = get_subs($con);
 <body>
     <main class = 'content'>
     <div class="emptybox"></div>
-    <div class = "items">
+    <div class = "info">
         <h2>
             Your Info:
         </h2>

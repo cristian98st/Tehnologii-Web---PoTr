@@ -187,11 +187,26 @@ main {
     flex-grow: 1;
 }
 
-.items {
+.info{
     background-color: #f3f1e0;
     display: flex;
     flex-direction: column;
     flex-grow: 1;
+    border: #000000;
+    border-radius: 2%
+}
+
+.items {
+    background-color: #f3f1e0;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 2;
+    min-height: 75.5vh;
+    padding:2%;
+    border-left: 5px solid #ece8c5;
+    border-right: 5px solid #ece8c5;
+    order: 0;
+    max-width: 60%; 
 }
 
 .poem_title {
