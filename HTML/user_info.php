@@ -87,6 +87,7 @@ $subs = get_subs($con);
     </h3>
     <ol>
         <?php
+        get_news($con);
         ?>
     </ol>
     </nav>

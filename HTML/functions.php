@@ -25,19 +25,52 @@ function add_tpoem($title,$author,$text,$translated,$language,$conn){
 }
 
 function get_news($conn){
-
-}
-
-function get_news_comm($comment_id,$conn){
-    $sql = 'SELECT * FROM COMMENTS WHERE ID == ' .$comment_id . ' ORDER BY CREATED_AT';
-}
-
-function get_news_poem($poem_id,$translated,$conn){
-    if($translated==true){
-        $sql = 'SELECT * FROM poems';
-
+    $sql = 'SELECT * FROM COMMENTS WHERE user_id = ' . $_SESSION['id'] . ' order by created_at desc';
+    $comm = $conn->query($sql)->fetch_assoc();
+    $sql = 'SELECT * FROM POEMS WHERE uploader_id = ' . $_SESSION['id'] . 'order by created_at desc';
+    $poems = $conn->query($sql)->fetch_assoc();
+    $sql = 'SELECT * FROM TRANSLATED_POEMS WHERE uploader_id = ' . $_SESSION['id'] . 'order by created_at desc';
+    $tpoems = $conn->query($sql)->fetch_assoc();
+    for($i = 0; $i<3;$i++){
+        if($i+1<=$comm->num_rows){
+            echo '<li>' . get_news_poem($comm['id'],0,$conn) . '</li>';
+        }
+        if($i+1<=$poems->num_rows){
+            echo '<li>' . get_news_poem($poems['id'],1,$conn) . '</li>';
+        }
+        if($i+1<=$tpoems->num_rows){
+            echo '<li>' . get_news_poem($tpoems['id'],2,$conn) . '</li>';
+        }
     }
-    
+
+}
+
+function get_news_poem($id,$type,$conn){
+    switch($type){
+    case (0):
+        $sql = 'SELECT * FROM COMMENTS where id = ' . $id ;
+        $table = $conn->query($sql);
+        $table = $table->fetch_assoc();
+        $sql = 'SELECT * FROM POEMS where id = ' . $table['poem_id'] ;
+        $title = $conn->query($sql);
+        $title = $title->fetch_assoc();
+        return '<article> <h4>On the poem: ' . $title['title'] . ' you wrote</h4>
+        <p>' . substr($table['body'],0,20) . '</p> </article>';
+    break;
+    case '1':
+        $sql = 'SELECT * FROM POEMS where id = ' . $id ;
+        $table = $conn->query($sql);
+        $table = $table->fetch_assoc();
+        return '<article> <h4>You added the poem: ' . $table['title'] . '</h4>
+        <p>' . substr($table['body'],0,20) . '</p> </article>';
+    break;
+    case '2':
+        $sql = 'SELECT * FROM TRANSLATED_POEMS where id = ' . $id ;
+        $table = $conn->query($sql);
+        $table = $table->fetch_assoc();
+        return '<article> <h4>You added the poem: ' . $table['title'] . '</h4>
+        <p>' . substr($table['body'],0,20) . '</p> </article>';
+    }
 }
 
 function get_subs($conn){
