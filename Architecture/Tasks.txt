@@ -12,6 +12,6 @@ Cristian Tugui
 	- upvotes/downvotes--V
 	- comments-----------V
 	- notifications------V
-	- subscribitions-----X
+	- subscribitions-----V
 	- news (page)--------X
 	- sign in -----------V
