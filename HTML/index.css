@@ -15,6 +15,7 @@ img.resize{
 .content{
     display:flex;
     flex-direction: row;
+    font-size: 150%;
 }
 
 /* .content form > h3{
@@ -190,7 +191,7 @@ main {
     background-color: #f3f1e0;
     display: flex;
     flex-direction: column;
-    flex-grow: 2;
+    flex-grow: 1;
 }
 
 .poem_title {

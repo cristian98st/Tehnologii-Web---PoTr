@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html lang="en-US">
-
+<?php
+$_SESSION['id']= 1;
+require_once('functions.php');
+$con = conn();
+$rez = get_userinfo($con)->fetch_assoc();
+$subs = get_subs($con);
+?>
 <head>
     <meta charset="utf-8">
     <title>Potter</title>
@@ -36,23 +42,54 @@
         <h2>
             Your Info:
         </h2>
+        <h3>
+            You have:
+            <?php
+        echo $subs[1];
+        ?>
+        Subscribers.
+        </h3>
+        <h3>
+            And you are subscibed to:
+            <?php
+            echo $subs[0];
+            ?>
+            people.
+        </h3>
         <form>
         <h3>
             Name:
         </h3>
+        <input type="text" name = "n" placeholder="
         <?php
-        $_SESSION['id']= 1;
-        require_once('functions.php');
-        $rez = get_userinfo()->fetch_assoc();
         echo 
-        '<input type="text" name = "n" placeholder="'. $rez['username'] . '">
-        ';
+        $rez['username'];
         ?>
+        ">
+        <br>
+        <h3>
+            Email:
+        </h3>
+        <?php
+        echo '<h4>' . $rez['email'] . '</h4>';
+        ?>
+        <br>
+        <h3>
+            Password:
+        </h3>
+        <input type="text" name = "p" placeholder="Parola ta">
         </form>    
     </div>
-
-    <nav>
-
+    <div class="emptybox"></div>
+    <nav style = 'flex-grow : 3'>
+    <h3>
+        Your contributions:
+    </h3>
+    <ol>
+        <?php
+        ?>
+    </ol>
+    </nav>
     <div class="emptybox"></div>
 </main>
 
