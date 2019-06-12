@@ -38,10 +38,14 @@ function getPoem($conn){
     } else {
         $_SESSION['translated'] = true;
         $_SESSION['poem_id'] = $row['poem_id'];
+        $originalPoem = getOriginalPoem($conn, $row['poem_id']);
         echo "
             <p class='uploader'> Uploader: "
                 .$username.
             "</p>
+            <p class='original_poem'> Original Poem: <a href='view_poem.php?poem_name=".$originalPoem['title']."&id=".$originalPoem['uploader_id']."'>"
+                .$originalPoem['title'].
+            "</a></p>
             <h2 class='poem_title'>"
                 .$row['title'].
             "</h2>
@@ -65,8 +69,18 @@ function getPoem($conn){
             <input type='hidden' name='downvotes' value='".$row['downvotes']."'>
             <button class='downvotePoem' name='downvotePoem' type='submit'></button>
             </form>";
-            getPoemUpvotes($conn, $row);
-            getPoemDownvotes($conn, $row);
+        if(($_SESSION['id'] == $row['uploader_id'] || $_SESSION['id'] == -2) && $_SESSION['id'] != -1){
+            echo "
+                <form class='editForm' method='POST' action='editPoem.php'>
+                    <input type='hidden' name='poem_id' value='".$row['poem_id']."'>
+                    <input type='hidden' name='userid' value='".$row['uploader_id']."'>
+                    <input type='hidden' name='date' value='".date('Y-m-d H:i:s')."'>
+                    <input type='hidden' name='message' value='".$row['body']."'>
+                    <button>Edit</button>
+                </form>";
+        }
+        getPoemUpvotes($conn, $row);
+        getPoemDownvotes($conn, $row);
     }
 }
 
@@ -130,6 +144,35 @@ function getPoemUpvotes($conn, $poem){
 
 function getPoemDownvotes($conn, $poem){
     echo "<p class='downvotesNoPoem'>".$poem['downvotes']."</p>";
+}
+
+function getOriginalPoem($conn, $poem_id){
+    $sql = "SELECT * from poems JOIN translates ON translates.original_poem_id = poems.poem_id 
+            WHERE translates.translated_poem_id = $poem_id";
+
+    $result = $conn->query($sql);
+
+    return $result->fetch_assoc();
+}
+
+function editPoem($conn){
+    if(isset($_POST['poemEdit'])){
+        $comment_id = $_POST['poem_id'];
+        $userid = $_POST['userid'];
+        $date = $_POST['date'];
+        $message = $_POST['message'];
+
+        $message = $message."\n<br><br><i> Edited by: ".getUploader($conn,$_SESSION['id'])." on ".date('Y-m-d H:i:s').". </i>";
+
+        $sql = "UPDATE translated_poem SET body = '$message', updated_at='".date('Y-m-d')."' WHERE poem_id = $poem_id";
+        $result = $conn->query($sql);
+        echo mysqli_error($conn);
+
+
+        $poem = getPoemByID($conn, $_SESSION['poem_id']);
+
+        header("Location: view_poem.php?poem_name=".$poem['title']."&id=".$poem['uploader_id']);
+    }
 }
 
 ?>

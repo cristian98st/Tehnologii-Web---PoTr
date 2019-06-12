@@ -11,7 +11,7 @@ Cristian Tugui
 	- data base (create)-V
 	- upvotes/downvotes--V
 	- comments-----------V
-	- notifications------X
+	- notifications------V
 	- subscribitions-----X
 	- news (page)--------X
 	- sign in -----------V

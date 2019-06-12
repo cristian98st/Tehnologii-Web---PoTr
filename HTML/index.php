@@ -27,7 +27,7 @@ if(isset($_GET['last']))
 <head>
     <meta charset="utf-8">
     <title>Potter</title>
-    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" type="text/css" href="index.css">
 </head>
 
 <body>

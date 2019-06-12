@@ -53,7 +53,7 @@ session_start();
     </div>';
     } else {
         echo '<div class="topnav">
-            <a href="index.html">Home</a>
+            <a href="index.php">Home</a>
             <a href="news.php">News</a>
             <a href="feed.html">Feed</a>
             <a href="aboutus.html">About us</a>
@@ -83,3 +83,5 @@ session_start();
 </body>
 
 </html>
+
+
