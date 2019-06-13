@@ -1,9 +1,15 @@
+<?php
+    include "subscribers.inc.php";
+    session_start();
+?>
+
+
 <!DOCTYPE html>
 <html lang="en-US">
 <?php
 require_once('functions.php');
 $id = $_GET['uid'];
-$_SESSION['id']=2;
+// $_SESSION['id']=2;
 $con = conn();
 $rez = get_userinfo($con,$id)->fetch_assoc();
 $subs = get_subs($con,$id);
@@ -88,6 +94,14 @@ $subs = get_subs($con,$id);
                 echo '<a href = "change_user_info.php"><button type = "button"> Change credentials</button></a>';
             ?>
         </form>    
+        <?php
+            if(isset($_SESSION['id']))
+                if($_SESSION['id']!=$id)
+                    if(!isSubscribed($con, $_SESSION['id'], $id))
+                        echo '<form method="POST" action="'.setSubscriber($con, $_SESSION['id'], $id).'">
+                                <button name="subscribeSubmit" type="submit">Subscribe</button>
+                            </form>';
+        ?>
     </div>
     <div class="emptybox"></div>
     <nav >

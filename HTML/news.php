@@ -1,5 +1,9 @@
 <?php
 session_start();
+include "news.inc.php";
+include "dba.inc.php";
+include "user.inc.php";
+include "translated_poem.inc.php";
 ?>
 
 <!DOCTYPE html>
@@ -59,12 +63,12 @@ session_start();
 
     <main>
         <div class="emptybox"></div>
-        <div class="items">
-            <h2>
-                Newspage
-            </h2>
+        <div class="items_news">
             <?php
-            echo "TODO";
+                getNewTranslations($connection);
+                getNewOriginalPoems($connection);
+                getNewComments($connection);
+                getTopSubscribitions($connection);
             ?>
         </div>
         <div class="emptybox"></div>
