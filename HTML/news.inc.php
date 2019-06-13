@@ -105,7 +105,7 @@ function getNewComments($connection){
                     '</a>
                 </td>
                 <td>
-                    <a href="user_info.php?uid='.$poem["uploader_id"].'">'
+                    <a href="user_info.php?uid='.$commenter["id"].'">'
                         .$commenter['username'].
                     '</a>
                 </td>

@@ -1,7 +1,11 @@
+<?php
+    session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en-US">
 <?php
-$_SESSION['id']= 2;
+// $_SESSION['id']= 2;
 require_once('functions.php');
 $con = conn();
 $rez = get_userinfo($con,$_SESSION['id'])->fetch_assoc();
