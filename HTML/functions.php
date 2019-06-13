@@ -20,8 +20,36 @@ function add_user($name,$mail,$pass,$conn){
     }
 }
 
-function add_tpoem($title,$author,$text,$translated,$language,$conn){
+function add_tpoem($title,$author,$ortitle,$text,$language,$id,$conn){
+    $sql = 'SELECT * FROM poems where title like "%' . $ortitle . '%"';
+    $title1 = $conn->query($sql);
+    if(mysqli_num_rows($title1)!=1){
+        die("Error");
+    }
+    else{
+    $title1 = $title1->fetch_assoc();
+    $sql = 'INSERT INTO translated_poems VALUES (0,\'' . $title1['id'] . '\',\'' . $language . '\',\'' . $title . '\',\'' . $author . '\',0,0,\'' . $text . '\',' . $id .',sysdate(),sysdate())';
+    // echo $sql;
+    
+    if ($conn->query($sql) === TRUE) {
+        echo '<p>Poem added</p>';
+    }
+    else{
+       die("Error");
+    }
+    $sql = 'SELECT max(id) FROM translated_poems';
+    $newid = $conn->query($sql);
+    $newid = $newid->fetch_row();
 
+    $sql = 'INSERT INTO translates VALUES(' .$title1['id'].  ',' .$newid[0] . ')';
+    if ($conn->query($sql) === TRUE) {
+        echo '<p>Translation added</p>';
+    }
+    else{
+       die("Error");
+    }
+
+}
 }
 
 function update_user($name,$pass,$conn){
@@ -93,11 +121,19 @@ function get_news_bydate($conn,$id,$date){
         }
     }
 }
+//NNNNNNNNNNNNNNHEREN
+// function get_ann($conn){
+//     $sql = 'SELECT * FROM annotations where poem_id = ' . $_GET['id'] . 'order by verse_number desc';
+//     $rez = $conn->query($sql);
+//     while($line = $rez->fetch_assoc()){
+//         echo '<p><b>'. $line['verse_number'] '</b></p>'
+//     }
+// }
 
 function get_feed($conn){
-    $sql = 'SELECT * from SUBSCRIBERS WHERE user_id = ' . $_SESSION['id'];
+    $sql = 'SELECT * FROM SUBSCRIBERS WHERE user_id = ' . $_SESSION['id'];
     $arr = $conn->query($sql);
-    $sql = 'SELECT * from users WHERE id = ' . $_SESSION['id'];
+    $sql = 'SELECT * FROM users WHERE id = ' . $_SESSION['id'];
     $date = $conn->query($sql);
     $date = $date->fetch_assoc();
     $date = $date['last_loggin'];

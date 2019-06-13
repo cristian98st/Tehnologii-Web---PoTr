@@ -32,18 +32,13 @@
 <body>
     <main class = 'content'>
         <div class = 'emptybox'></div>
-        <form action = 'sign_poem.php' method = 'post'>
+        <form action = 'add_poem.php' method = 'post'>
             <h2>Required info:</h2>
             <hr />
             <h3>Title:</h3>
             <input type = 'text' name = 'title' placeholder="Insert title here.." required>
             <h3>Author:</h3>
             <input type = 'text' name = 'author' placeholder="Name.." required>
-            <h3>Type:</h3>
-            <select name = 'translated'>
-                <option value = '0'>Original</option>
-                <option value = '1'>Translated</option>
-            </select>
             <h3>Text:</h3>
             <textarea placeholder="Insert text here.." over cols = 60 rows = 30 name = 'text' required ></textarea>
             <h3>Language:</h3>
