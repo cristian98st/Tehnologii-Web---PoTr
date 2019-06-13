@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html lang="en-US">
 <?php
+$_SESSION['id']= 2;
 require_once('functions.php');
-$id = $_GET['uid'];
-$_SESSION['id']=2;
 $con = conn();
-$rez = get_userinfo($con,$id)->fetch_assoc();
-$subs = get_subs($con,$id);
+$rez = get_userinfo($con,$_SESSION['id'])->fetch_assoc();
+$subs = get_subs($con,$_SESSION['id']);
 ?>
 <head>
     <meta charset="utf-8">
@@ -35,75 +34,65 @@ $subs = get_subs($con,$id);
         <a href="aboutus-on.html">About us</a>
     </div>
 </header>
-
+<div class="emptybox"></div>
 <body>
     <main class = 'content'>
-    <div class="emptybox" style = "flex-grow:3"></div>
+    <div class="emptybox"></div>
     <div class = "info">
         <h2>
-        <?php
-        echo 
-        $rez['username'];
-        ?>
-        's Info:
+            Your Info:
         </h2>
-        <p>
-        <?php
-        echo 
-        $rez['username'];
-        ?> has:
+        <h3>
+            You have:
             <?php
         echo $subs[1];
         ?>
         Subscribers.
-</p>
-        <p>
-            And is subscribed to:
+        </h3>
+        <h3>
+            And you are subscribed to:
             <?php
             echo $subs[0];
             ?>
             people.
-</p>
-        <form >
+        </h3>
+        <form action="change.php" method="GET">
         <h3>
             Name:
         </h3>
-        <p>
+        <input type="text" name = "n" placeholder="
         <?php
         echo 
         $rez['username'];
         ?>
-        </p>
+        ">
         <br>
         <h3>
             Email:
         </h3>
         <?php
-        echo '<p>' . $rez['email'] . '</p>';
+        echo '<h4>' . $rez['email'] . '</h4>';
         ?>
         <br>
-        <?php
-        if(isset($_SESSION['id']))
-            if($_SESSION['id']==$id)
-                echo '<a href = "change_user_info.php"><button type = "button"> Change credentials</button></a>';
-            ?>
+        <h3>
+            Password:
+        </h3>
+        <input type="text" name = "p" placeholder="Parola ta">
+        <button type="submit">Commit changes</button>
         </form>    
     </div>
     <div class="emptybox"></div>
-    <nav >
+    <nav style = 'flex-grow : 1'>
     <h3>
-    <?php
-        echo 
-        $rez['username'];
-        ?>'s contributions:
+        Your contributions:
     </h3>
     <ol>
         <?php
-        get_news($con,$id);
+        get_news($con,$_SESSION['id']);
         ?>
     </ol>
     </nav>
-    <div class="emptybox" style="flex-grow:3"></div>
+    <div class="emptybox"></div>
 </main>
 
 </body>

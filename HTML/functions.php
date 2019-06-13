@@ -39,14 +39,14 @@ function update_user($name,$pass,$conn){
     }
 }
 
-function get_news($conn){
-    $sql = 'SELECT * FROM COMMENTS WHERE user_id = ' . $_SESSION['id'] . ' order by created_at desc';
+function get_news($conn,$id){
+    $sql = 'SELECT * FROM COMMENTS WHERE user_id = ' . $id . ' order by created_at desc';
     $comm = $conn->query($sql);
     $commrez = $comm->fetch_assoc();
-    $sql = 'SELECT * FROM POEMS WHERE uploader_id = ' . $_SESSION['id'] . ' order by created_at desc';
+    $sql = 'SELECT * FROM POEMS WHERE uploader_id = ' . $id . ' order by created_at desc';
     $poems = $conn->query($sql);
     $poemsrez = $poems->fetch_assoc();
-    $sql = 'SELECT * FROM TRANSLATED_POEMS WHERE uploader_id = ' . $_SESSION['id'] . ' order by created_at desc';
+    $sql = 'SELECT * FROM TRANSLATED_POEMS WHERE uploader_id = ' . $id . ' order by created_at desc';
     $tpoems = $conn->query($sql);
     $tpoemsrez = $tpoems->fetch_assoc();
     for($i = 1; $i<4;$i++){
@@ -72,13 +72,12 @@ function get_news_text($id,$type,$conn){
         $sql = 'SELECT * FROM POEMS WHERE poem_id = ' . $table['poem_id'] ;
         $title = $conn->query($sql);
         $title = $title->fetch_assoc();
-        $return = '<article> <p>On the poem: ' . $title['title'] . ' you wrote:<br>"' .
-        substr($table['body'],0,52) ;
+        $return = '<article> <p>Commented on the poem "' . $title['title'] . '":<br>"' . substr($table['body'],0,52) ;
         if(strlen($table['body'])<52){
-            $return = $return . '"<br> And you got : ' . $table['upvotes'] .'votes!</p> </article>';
+            $return = $return . '"<br> with : ' . $table['upvotes'] .' votes!</p> </article>';
         }
         else{
-            $return = $return . '..."<br> And you got : ' . $table['upvotes'] .'votes!</p> </article>';
+            $return = $return . '..."<br> with : ' . $table['upvotes'] .' votes!</p> </article>';
         }
         return $return;
     break;
@@ -86,22 +85,22 @@ function get_news_text($id,$type,$conn){
         $sql = 'SELECT * FROM POEMS where poem_id = ' . $id ;
         $table = $conn->query($sql);
         $table = $table->fetch_assoc();
-        return '<article> <p>You added the poem: ' . $table['title'] . '
-        <br>"' . substr($table['body'],0,52) . '..."</p> </article>';
+        return '<article> <p>Added the poem: "' . $table['title'] . '
+        "<br>"' . substr($table['body'],0,52) . '..."</p> </article>';
     break;
     case '2':
         $sql = 'SELECT * FROM TRANSLATED_POEMS where poem_id = ' . $id ;
         $table = $conn->query($sql);
         $table = $table->fetch_assoc();
-        return '<article> <p>You added the poem: ' . $table['title'] . '
+        return '<article> <p>Added the translation to: "' . $table['title'] . '"
         <br>"' . substr($table['body'],0,52) . '..."<br> with : ' . $table['upvotes'] .' votes!</p> </article>';
     }
 }
 
-function get_subs($conn){
-    $sql = 'SELECT COUNT(*) FROM subscribers where subscriber_id = ' . $_SESSION['id'];
+function get_subs($conn,$id){
+    $sql = 'SELECT COUNT(*) FROM subscribers where subscriber_id = ' . $id;
     $sub_to = $conn->query($sql);
-    $sql = 'SELECT COUNT(*) FROM subscribers where user_id = ' . $_SESSION['id'];
+    $sql = 'SELECT COUNT(*) FROM subscribers where user_id = ' . $id;
     $sub_from = $conn->query($sql);
     $sub_to = $sub_to->fetch_row();
     $sub_from = $sub_from->fetch_row();
@@ -109,8 +108,8 @@ function get_subs($conn){
     return $rez;
 }
 
-function get_userinfo($conn){
-    $sql = 'SELECT * FROM users where id = ' . $_SESSION['id'];
+function get_userinfo($conn,$id){
+    $sql = 'SELECT * FROM users where id = ' . $id;
     $inf = $conn->query($sql);
     return $inf;
 }
