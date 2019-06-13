@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en-US">
 <?php
-$_SESSION['id']= 1;
+$_SESSION['id']= 2;
 require_once('functions.php');
 $con = conn();
 $rez = get_userinfo($con)->fetch_assoc();
@@ -50,13 +50,13 @@ $subs = get_subs($con);
         Subscribers.
         </h3>
         <h3>
-            And you are subscibed to:
+            And you are subscribed to:
             <?php
             echo $subs[0];
             ?>
             people.
         </h3>
-        <form>
+        <form action="change.php" method="GET">
         <h3>
             Name:
         </h3>
@@ -78,10 +78,11 @@ $subs = get_subs($con);
             Password:
         </h3>
         <input type="text" name = "p" placeholder="Parola ta">
+        <button type="submit">Commit changes</button>
         </form>    
     </div>
     <div class="emptybox"></div>
-    <nav style = 'flex-grow : 3'>
+    <nav style = 'flex-grow : 1'>
     <h3>
         Your contributions:
     </h3>
