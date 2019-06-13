@@ -80,7 +80,7 @@ if(isset($_GET['last']))
 
     ?>
 
-    <main class="content">
+    <main>
         <div class="emptybox"></div>
         <div class="items">
             <h2>

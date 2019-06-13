@@ -62,7 +62,7 @@ session_start();
 
     ?>
 
-    <main class="content">
+    <main>
         <div class="emptybox"></div>
         <div class="items">
             <!-- body -->

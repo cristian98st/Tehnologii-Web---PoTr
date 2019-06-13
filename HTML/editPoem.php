@@ -35,7 +35,7 @@ session_start();
         <a href="feed.html">Feed</a>
         <a href="aboutus.html">About us</a>
     </div>
-    <main class="content">
+    <main>
         <div class="emptybox"></div>
         <div class="items">
             <!-- body -->
