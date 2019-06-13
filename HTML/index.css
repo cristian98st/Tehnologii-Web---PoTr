@@ -11,6 +11,11 @@ body {
 img.resize{
     max-width: 50px;
 }
+	
+
+.info > h2 {
+margin-bottom: 0;
+} 
 
 .content{
     display:flex;
@@ -23,34 +28,29 @@ img.resize{
     text-align: center;
 } */
 
-h2 {
-    margin-bottom: 0;
-}
-
-form > h2{
+.content form > h2{
     position: relative;
     margin:0;
     margin-top: 3%;
 }
 
-form > hr{
+.content form > hr{
     width: 100%;
     margin:0;
 }
 
-form{
-    padding-top: 3%;
+.content form{
+    flex-grow: 1;
     display:flex;
     flex-direction: column;
     background:#197bbd67;
-    border-radius: 3%;
 }
 
-form > *{
+.content form > *{
     margin: 1%;
 }
 
-form > input[type = 'text'] {
+.content form > input[type = 'text'] {
     border: 2px solid #000000 ;
     font-size: 15px;
     padding: 7px 20px;
@@ -60,18 +60,13 @@ form > input[type = 'text'] {
     text-align: center;
 }
 
-form > button {
+.content form > button {
     height: 100%;
-    background: #197bbd;
+    background: #f3f1e0;
     color: #000000;
 }
 
-form a{
-    margin:0;
-    width: 100%;
-}
-
-form > select{
+.content form > select{
     text-align: center;
     width:10%;
     border-radius: 20px;
@@ -80,10 +75,10 @@ form > select{
     background: #f3f1e0;;
 }
 
-form > textarea{
+.content form > textarea{
     width: 50%;
     border-radius: 20px;
-    height: auto;
+    height: 90%;
     text-align: center;
     position: relative;
     background: #f3f1e0;
@@ -146,13 +141,6 @@ form > textarea{
     color: #f3f1e0;
 }
 
-nav{
-    background: #f3f1e0;
-    border-radius: 3%;
-    width: 20%;
-    height: 10%;
-}
-
 .topnav {
     display: flex;
     flex-direction: row;
@@ -191,7 +179,6 @@ nav{
 hr {
     border: 1px solid #f1f1f1;
     margin-bottom: 25px;
-    color: #000000;
 }
 
 main {
@@ -209,33 +196,9 @@ main {
     background-color: #f3f1e0;
     display: flex;
     flex-direction: column;
-    /* flex-grow: 1; */
-    width: 30%;
-    height: 2%;
+    flex-grow: 1;
     border: #000000;
-    border-radius: 3%;
-}
-.info > *{
-        padding-left: 3%;
-}
-.info >form> a{
-    margin:0;
-}
-
-.info > form >button {
-    width: 100px;
-    height: 30px;
-    background-color: #197bbd;
-    color: #f1f1f1;
-    margin:1%;
-}
-
-.info > form > a >button {
-    width: 100px;
-    height: 40px;
-    background-color: #197bbd;
-    color: #f1f1f1;
-    margin:1%;
+    border-radius: 2%
 }
 
 .items {
@@ -447,6 +410,13 @@ button {
 
  nav{
      flex-grow: 1;
+     background: #f3f1e0;
+    border-radius: 3%;
+    width: 20%;
+    height: 10%;
+ }
+ nav > a{
+     border-right: 10cm;
  }
 
 @media screen and (max-width: 600px) {

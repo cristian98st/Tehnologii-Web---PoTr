@@ -72,12 +72,13 @@ function get_news_text($id,$type,$conn){
         $sql = 'SELECT * FROM POEMS WHERE poem_id = ' . $table['poem_id'] ;
         $title = $conn->query($sql);
         $title = $title->fetch_assoc();
-        $return = '<article> <p>Commented on the poem "' . $title['title'] . '":<br>"' . substr($table['body'],0,52) ;
+        $return = '<article><p>Commented on the poem <a href = "view_poem.php?poem_name=' . $title['title'] .'&id='. $title['uploader_id'] .'">"' . $title['title'] . '"</a>:<br>"' . substr($table['body'],0,52) ;
+        // $return = '<article> <p>Commented on the poem ' . $title['title'] . '":<br>"' . substr($table['body'],0,52) ;
         if(strlen($table['body'])<52){
-            $return = $return . '"<br> with : ' . $table['upvotes'] .' votes!</p> </article>';
+            $return = $return . '"<br> with : ' . $table['upvotes'] .' votes!</p></article>';
         }
         else{
-            $return = $return . '..."<br> with : ' . $table['upvotes'] .' votes!</p> </article>';
+            $return = $return . '..."<br> with : ' . $table['upvotes'] .' votes!</p></article>';
         }
         return $return;
     break;
@@ -85,15 +86,19 @@ function get_news_text($id,$type,$conn){
         $sql = 'SELECT * FROM POEMS where poem_id = ' . $id ;
         $table = $conn->query($sql);
         $table = $table->fetch_assoc();
-        return '<article> <p>Added the poem: "' . $table['title'] . '
-        "<br>"' . substr($table['body'],0,52) . '..."</p> </article>';
+        return '<article><p>Added the poem: <a href = "view_poem.php?poem_name=' . $table['title'] . '&id=' . $table['uploader_id'] . '">"' . $table['title'] . '
+        "</a><br>"' . substr($table['body'],0,52) . '..."</p></article>';
+        // return '<article><p>Added the poem: "' . $table['title'] . '
+        // "<br>"' . substr($table['body'],0,52) . '..."</p></article>';
     break;
     case '2':
         $sql = 'SELECT * FROM TRANSLATED_POEMS where poem_id = ' . $id ;
         $table = $conn->query($sql);
         $table = $table->fetch_assoc();
-        return '<article> <p>Added the translation to: "' . $table['title'] . '"
-        <br>"' . substr($table['body'],0,52) . '..."<br> with : ' . $table['upvotes'] .' votes!</p> </article>';
+        return '<article><p>Added the translation to: <a href = "view_poem.php?poem_name=' . $table['title'] . '&id=' . $table['uploader_id'] . '">"' . $table['title'] . '"</a>
+        <br>"' . substr($table['body'],0,52) . '..."<br> with : ' . $table['upvotes'] .' votes!</p></article>';
+        // return '<article><p>Added the translation to: "' . $table['title'] . '"
+        // <br>"' . substr($table['body'],0,52) . '..."<br> with : ' . $table['upvotes'] .' votes!</p></article>';
     }
 }
 
