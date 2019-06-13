@@ -22,9 +22,10 @@ function getPoem($conn){
         $_SESSION['translated'] = false;
         $_SESSION['poem_id'] = $row['poem_id'];
         echo "
-            <p class='uploader'> Uploader:"
+            <p class='uploader'> Uploader:
+            <a href='user_info.php?uid=".$row['uploader_id']."'>"
                 .$username.
-            "</p></p>
+            "</a></p>
             <h2 class='poem_title'>"
                 .$row['title'].
             "</h2>
@@ -40,9 +41,10 @@ function getPoem($conn){
         $_SESSION['poem_id'] = $row['poem_id'];
         $originalPoem = getOriginalPoem($conn, $row['poem_id']);
         echo "
-            <p class='uploader'> Uploader: "
+            <p class='uploader'> Uploader:
+            <a href='user_info.php?uid=".$row['uploader_id']."'>"
                 .$username.
-            "</p>
+            "</a></p>
             <p class='original_poem'> Original Poem: <a href='view_poem.php?poem_name=".$originalPoem['title']."&id=".$originalPoem['uploader_id']."'>"
                 .$originalPoem['title'].
             "</a></p>
