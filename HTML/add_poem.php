@@ -7,14 +7,13 @@
 </head>
 <body>
 <?php
-    if(!isset($_SESSION['id'])){
-        $_SESSION['id']=2;
-    }
+    session_start();
     require_once('functions.php');
-    if($_POST['translated']==0){
-        add_poem($_POST['title'],$_POST['author'],$_POST['text'],$_SESSION['id']);
+    if(isset($_POST['originalPoem'])){
+        header('Location: add_opoem.php');
+    } else if(isset($_POST['translatedPoem'])){
+        header("Location: add_tpoem.php");
     }
-    header('Location: http://localhost/index.php')
 ?>
    
 </body>
