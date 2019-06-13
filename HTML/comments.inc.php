@@ -50,9 +50,15 @@ function getComments($conn){
     $result = $conn->query($sql);
 
     while($row = $result->fetch_assoc()){
-        echo "<div class='comments_box'><p>"
+        echo "<div class='comments_box'><p>";
+        if($row['user_id']!=-2 && $row['user_id']!=-1)     
+            echo "<a href='user_info.php?uid=".$row['user_id']."'>"
                 .getUploader($conn, $row['user_id']).
-             "<br>"
+             "</a>";
+        else
+            echo getUploader($conn, $row['user_id']);
+        
+        echo "<br>"
                 .$row['created_at'].
              "<br><br>"
                 .nl2br($row['body']).
