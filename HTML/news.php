@@ -29,6 +29,8 @@ include "template.php";
                 getNewTranslations($connection);
                 getNewOriginalPoems($connection);
                 getNewComments($connection);
+                getTopCommentedPoems($connection);
+                getTopActiveUsers($connection);
                 getTopSubscribitions($connection);
             ?>
         </div>

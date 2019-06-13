@@ -30,30 +30,18 @@
 </header>
 
 <body>
-    <main class = 'content'>
+    <main>
         <div class = 'emptybox'></div>
-        <form action = 'sign_poem.php' method = 'post'>
-            <h2>Required info:</h2>
-            <hr />
-            <h3>Title:</h3>
-            <input type = 'text' name = 'title' placeholder="Insert title here.." required>
-            <h3>Author:</h3>
-            <input type = 'text' name = 'author' placeholder="Name.." required>
-            <h3>Type:</h3>
-            <select name = 'translated'>
-                <option value = '0'>Original</option>
-                <option value = '1'>Translated</option>
-            </select>
-            <h3>Text:</h3>
-            <textarea placeholder="Insert text here.." over cols = 60 rows = 30 name = 'text' required ></textarea>
-            <h3>Language:</h3>
-            <h4><input type = 'radio' name = 'lang' value = 'English'>English</h4>
-            <h4><input type = 'radio' name = 'lang' value = 'German'>German</h4>
-            <h4><input type = 'radio' name = 'lang' value = 'Italian'>Spanish</h4>
-            <h4><input type = 'radio' name = 'lang' value = 'Romanian'>Romanian</h4>
-            <h4><input type = 'radio' name = 'lang' value = 'Russian'>Russian</h4>
-            <button type="submit">Finish</button>
-        </form>
+        <div class='items'>
+            <h2>
+                What type of poem do you want to add?
+            </h2>
+            <br><br>
+            <form action = 'add_poem.php' method = 'post'>
+                <button type="submit" name="originalPoem" class="addPoem">Add a poem</button>
+                <button type="submit" name="translatedPoem" class="addPoem">Add a translation</button>
+            </form>
+        </div>
         <div class = 'emptybox'></div>
     </main>
 </body>

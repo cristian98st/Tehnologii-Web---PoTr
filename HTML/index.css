@@ -128,7 +128,7 @@ ul.feed > li{
 
 .toprow {
     overflow: hidden;
-    /* background-color: #197bbd; */
+    background-color: #197bbd;
     height: 100px;
     width: 100%;
 }
@@ -540,6 +540,12 @@ button {
 
  nav{
      flex-grow: 1;
+ }
+
+ .addPoem {
+     width: 20%;
+     height: 70px;
+     font-size: 100%;
  }
 
 @media screen and (max-width: 600px) {
