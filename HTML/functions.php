@@ -280,6 +280,36 @@ function add_poem($title,$author,$text,$id,$conn){
     }
 }
 
+function Rss_GetFeed(){
+    $con = conn();
+    $sql = 'SELECT * FROM `translated_poems` WHERE updated_at + 7 > sysdate()';
+    $resset = $con->query($sql);
+    $details = '<?xml version="1.0" encoding="ISO-8859-1" ?>
+    <rss version="2.0">
+     <channel>
+      <title>Potter</title>
+      <link>http://localhost/HTML/index.php</link>
+      <description>An app for translating, commenting and annotating poems.</description>
+      <language>en-us</language>
+      <image>
+       <title>Potter</title>
+       <url>http://pluspng.com/img-png/feather-pen-png-black-and-white-size-512.png</url>
+       <link>http://localhost/HTML/index.php</link>
+       <width>50</width>
+       <height>50</height>
+      </image>';
+      $items = '';
+    while($rez = $resset->fetch_assoc()){
+        $items .= '<item>
+         <title>'. $rez["title"] .'</title>
+         <link>http://localhost/HTML/view_poem.php?poem_name="'. $rez["title"] . '"&amp;id="'. $rez["uploader_id"] .'"</link>
+         <description>' . substr($rez["body"],0,200) .'</description>
+        </item>';
+       }
+    echo $details . $items . '</channel></rss>';
+    end_conn($con);
+}
+
 function end_conn($conn){
     $conn->close();
 }
