@@ -187,7 +187,7 @@ function get_news_text($id,$type,$conn){
         $sql = 'SELECT * FROM POEMS WHERE poem_id = ' . $table['poem_id'] ;
         $title = $conn->query($sql);
         $title = $title->fetch_assoc();
-        $sql = 'SELECT * FROM users WHERE id = ' . $table['uploader_id'] ;
+        $sql = 'SELECT * FROM users WHERE id = ' . $table['user_id'] ;
         $name = $conn->query($sql);
         $name = $name->fetch_assoc();
         $return = '<article><p>' . $name['username'] . ' commented on the poem <a href = "view_poem.php?poem_name=' . $title['title'] .'&id='. $title['uploader_id'] .'">"' . $title['title'] . '"</a>:<br>"' . substr($table['body'],0,100) ;
@@ -219,7 +219,7 @@ function get_news_text($id,$type,$conn){
         $sql = 'SELECT * FROM TRANSLATED_POEMS where poem_id = ' . $id ;
         $table = $conn->query($sql);
         $table = $table->fetch_assoc();
-        $sql = 'SELECT * FROM users WHERE id = ' . $id ;
+        $sql = 'SELECT * FROM users WHERE id = ' . $table['uploader_id'] ;
         $name = $conn->query($sql);
         $name = $name->fetch_assoc();
         return '<article><p>' . $name['username'] . ' added the translation to: <a href = "view_poem.php?poem_name=' . $table['title'] . '&id=' . $table['uploader_id'] . '">"' . $table['title'] . '"</a>

@@ -105,6 +105,8 @@ h2 {
     border-right: 5px solid #ece8c5;
     margin:auto;
     width : 70%;
+    list-style-type: none;
+
 }
 
 .row-article >nav{
@@ -120,10 +122,14 @@ h2 {
 
 ul.row-article > li{
     flex-grow: 1;
-    border-width: 5px;
+    background: #ece8c5 !important;
+    border-radius: 5px;
     margin: 1%;
-    border: black;
     width: 180px;
+} 
+
+ul.row-article > li p{
+    padding: 10px;
 } 
 
 .toprow {
