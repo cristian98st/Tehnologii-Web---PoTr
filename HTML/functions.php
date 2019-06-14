@@ -78,7 +78,7 @@ function get_news($conn,$id){
     $sql = 'SELECT * FROM TRANSLATED_POEMS WHERE uploader_id = ' . $id . ' order by created_at desc';
     $tpoems = $conn->query($sql);
     $tpoemsrez = $tpoems->fetch_assoc();
-    for($i = 1; $i<4;$i++){
+    for($i = 1; $i<max(mysqli_num_rows($comm),mysqli_num_rows($poems),mysqli_num_rows($tpoems));$i++){
         if(mysqli_num_rows($comm)>=$i){
             echo '<li>' . get_news_text($commrez['comment_id'],0,$conn) . '</li>';
         }
