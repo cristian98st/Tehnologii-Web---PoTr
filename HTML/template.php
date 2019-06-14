@@ -68,7 +68,7 @@ function applyTemplate($connection, $page_name){
         if($page_name == "aboutus")
             echo '<a class="active" href="aboutus.html">About us</a>';
         else
-            echo '<a href="aboutus.html">About us</a>';
+            echo '<a href="aboutus.php">About us</a>';
     echo '</div>';
     } else {
         echo '<div class="topnav">';
@@ -90,7 +90,7 @@ function applyTemplate($connection, $page_name){
         if($page_name == "aboutus")
             echo '<a class="active" href="aboutus.html">About us</a>';
         else
-            echo '<a href="aboutus.html">About us</a>';
+            echo '<a href="aboutus.php">About us</a>';
     echo '</div>';
     }
 }

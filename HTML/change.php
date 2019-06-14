@@ -10,7 +10,7 @@ echo '
 </head>
 <h1>';
 $con = conn();
-// $_SESSION['id'] = 1;
+session_start();
 if(isset($_GET['n']) or isset($_GET['p'])){
     echo update_user($_GET['n'],$_GET['p'],$con,$_SESSION['id']);
 }

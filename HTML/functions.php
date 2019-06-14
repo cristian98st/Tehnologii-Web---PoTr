@@ -55,13 +55,13 @@ function add_tpoem($title,$author,$ortitle,$text,$language,$id,$conn){
 
 function update_user($name,$pass,$conn,$id){
     if($name!=''){
-        $sql = 'UPDATE users SET username = \' ' . $name .' \' WHERE users.id = ' . $id;
+        $sql = 'UPDATE users SET username = \'' . $name .'\' WHERE users.id = ' . $id;
         if($conn->query($sql) === true){
             echo 'Name updated succesfuly<br>';
         }
     }
     if($pass!= ''){
-        $sql = 'UPDATE users SET password = \' ' . $pass .' \' WHERE users.id = ' . $id;
+        $sql = 'UPDATE users SET password = "' . $pass .'" WHERE users.id = ' . $id;
         if($conn->query($sql) === true){
             echo 'Pass updated succesfuly<br>';
         }
@@ -151,12 +151,9 @@ function get_ann($conn,$id){
 function get_feed($conn,$id){
     $sql = 'SELECT * FROM SUBSCRIBERS WHERE user_id = ' . $id;
     $arr = $conn->query($sql);
-    $sql = 'SELECT * FROM users WHERE id = ' . $id;
-    $date = $conn->query($sql);
-    $date = $date->fetch_assoc();
-    $date = $date['last_loggin'];
+
     while($rez = $arr->fetch_assoc()){
-        get_news_bydate($conn,$rez['subscriber_id'],$date);
+        get_news($conn,$rez['subscriber_id']);
     }
 }
 

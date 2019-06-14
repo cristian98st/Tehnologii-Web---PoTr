@@ -1,11 +1,12 @@
 <?php
     function getLogin($conn) {
         if(isset($_POST['loginSubmit'])){
+            $connection = new mysqli("localhost", "root", "", "potr");
             $username = $_POST['uname'];
             $password = $_POST['psw'];
 
             $sql = "SELECT * FROM users WHERE username = '$username' AND password = '$password'";
-            $result = $conn->query($sql);
+            $result = $connection->query($sql);
 
             if(mysqli_num_rows($result) == 1){
                 if($row = $result->fetch_assoc()){

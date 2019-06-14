@@ -1,4 +1,8 @@
 <?php
+    include "user.inc.php";
+    include "dba.inc.php";
+    include "notification.inc.php";
+    include "template.php";
     include "subscribers.inc.php";
     session_start();
 ?>
@@ -21,25 +25,9 @@ $subs = get_subs($con,$id);
 </head>
 
 <header>
-    <div class="toprow">
-        <input type="text" placeholder="Search poem...">
-        <h1 href="title">
-                <a href="index.html"><img class="resize" src="http://pluspng.com/img-png/feather-pen-png-black-and-white-size-512.png"></a>
-                <span style="font-size: 82px; margin: 21px 0;">Potter</span>
-        </h1>
-        <div class="topright-on">
-                <a href="user_info.html">User info</a>
-                <a href="index.html">Log Out</a>
-        </div>
-    </div>
-    <div class="topnav">
-        <a href="index_loggedin.html">Home</a>
-        <a href="news-on.html">News</a>
-        <a href="feed-on.html">Feed</a>
-        <a href="add_poem.html">Add your poem</a>
-        <a href="my_poems.html">My poems</a>
-        <a href="aboutus-on.html">About us</a>
-    </div>
+    <?php
+    applyTemplate($connection, "feed");
+    ?>
 </header>
 
 <body>
