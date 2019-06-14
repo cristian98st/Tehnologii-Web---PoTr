@@ -65,15 +65,12 @@ session_start();
     <main>
         <div class="emptybox"></div>
         <div class="items">
-            <div class = "feed">
+            <div class = "row-article">
             <!-- body -->
             <div class="poem_box">
                 <?php
                 getPoem($connection);
                 ?>
-            </div>
-            <div class = "emptybox"></div>
-            <nav>nnote</nav>
 </div>
             <?php
             if($_SESSION['translated'] == true){

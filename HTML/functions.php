@@ -52,15 +52,15 @@ function add_tpoem($title,$author,$ortitle,$text,$language,$id,$conn){
 }
 }
 
-function update_user($name,$pass,$conn){
+function update_user($name,$pass,$conn,$id){
     if($name!=''){
-        $sql = 'UPDATE users SET username = \' ' . $name .' \' WHERE users.id = ' . $_SESSION['id'];
+        $sql = 'UPDATE users SET username = \' ' . $name .' \' WHERE users.id = ' . $id;
         if($conn->query($sql) === true){
             echo 'Name updated succesfuly<br>';
         }
     }
     if($pass!= ''){
-        $sql = 'UPDATE users SET password = \' ' . $pass .' \' WHERE users.id = ' . $_SESSION['id'];
+        $sql = 'UPDATE users SET password = \' ' . $pass .' \' WHERE users.id = ' . $id;
         if($conn->query($sql) === true){
             echo 'Pass updated succesfuly<br>';
         }
@@ -121,19 +121,36 @@ function get_news_bydate($conn,$id,$date){
         }
     }
 }
-//NNNNNNNNNNNNNNHEREN
-// function get_ann($conn){
-//     $sql = 'SELECT * FROM annotations where poem_id = ' . $_GET['id'] . 'order by verse_number desc';
-//     $rez = $conn->query($sql);
-//     while($line = $rez->fetch_assoc()){
-//         echo '<p><b>'. $line['verse_number'] '</b></p>'
-//     }
-// }
 
-function get_feed($conn){
-    $sql = 'SELECT * FROM SUBSCRIBERS WHERE user_id = ' . $_SESSION['id'];
+function get_ann($conn,$id){
+    $sql = 'SELECT * FROM annotations where poem_id = ' . $id . ' order by verse_number asc';
+    // echo $sql;
+    $rez = $conn->query($sql);
+    if(mysqli_num_rows($rez)>0){
+        echo '<h4> Annotations:</h4>';
+        while($line = $rez->fetch_assoc()){
+            echo '<p><b>'. $line['verse_number'] . '</b> ' . $line['body'] . ' </p>';
+        }
+        $ret='<form action = "add_ann.php" method = "post">
+        <input type="number" max="';
+        $sql = 'SELECT * FROM translated_poems where poem_id = ' .$id;
+        $rows = $conn->query($sql)->fetch_assoc();
+        $array= explode("\n", $rows['body']);
+        $ret = $ret . count($array);
+        $ret = $ret . '" min="1" name="line" step="1" value="1" />
+        <br />
+        <textarea placeholder="Add new adnotation.." name = "text"></textarea></form>';
+        echo $ret;
+    }
+    else{
+        echo 'No annotations';
+    }
+}
+
+function get_feed($conn,$id){
+    $sql = 'SELECT * FROM SUBSCRIBERS WHERE user_id = ' . $id;
     $arr = $conn->query($sql);
-    $sql = 'SELECT * FROM users WHERE id = ' . $_SESSION['id'];
+    $sql = 'SELECT * FROM users WHERE id = ' . $id;
     $date = $conn->query($sql);
     $date = $date->fetch_assoc();
     $date = $date['last_loggin'];

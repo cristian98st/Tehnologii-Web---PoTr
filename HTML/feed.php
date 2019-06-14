@@ -28,7 +28,7 @@
     </div>
     <main class="content">
         <div class="emptybox"></div>
-        <ul class="feed">
+        <ul class="row-article">
             <?php
             $_SESSION['id']=1;
             require_once('functions.php');

@@ -6,6 +6,7 @@
 <html lang="en-US">
 <?php
 // $_SESSION['id']= 2;
+session_start();
 require_once('functions.php');
 $con = conn();
 $rez = get_userinfo($con,$_SESSION['id'])->fetch_assoc();

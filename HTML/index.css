@@ -93,7 +93,7 @@ h2 {
     background: #f3f1e0;
 }
 
-.feed {
+.row-article {
     display:flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -107,18 +107,18 @@ h2 {
     width : 70%;
 }
 
-.feed >nav{
+.row-article >nav{
         background:#ece8c5;
         border-radius: 3%;
         padding:1%;
         height: auto;
 }
 
-/* .feed :last-of-type p{
+/* .row-article :last-of-type p{
     width : 10%;
 } */
 
-ul.feed > li{
+ul.row-article > li{
     flex-grow: 1;
     border-width: 5px;
     margin: 1%;

@@ -83,6 +83,12 @@ function getPoem($conn){
         }
         getPoemUpvotes($conn, $row);
         getPoemDownvotes($conn, $row);
+        require_once('functions.php');
+        echo '</div> 
+        <div class = "emptybox"></div>
+        <nav>';
+        get_ann($conn,$row['poem_id']);
+        echo '</nav>';
     }
 }
 
