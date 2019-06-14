@@ -65,7 +65,7 @@ h2 {
 }
 
 .content form > button {
-    height: 100%;
+    height: 40px;
     background: #197bbd;
     color: #000000;
 }
@@ -128,7 +128,7 @@ ul.feed > li{
 
 .toprow {
     overflow: hidden;
-    background-color: #197bbd;
+    /* background-color: #197bbd; */
     height: 100px;
     width: 100%;
 }
@@ -517,8 +517,8 @@ button {
 }
 
 .formNotification select {
-    outline-color: #197bbd;
-    outline: #197bbd;
+    outline-color: transparent;
+    outline: transparent;
     background: transparent;
     box-shadow: none !important;
     border: none;
@@ -533,7 +533,7 @@ button {
  }
 
  .formNotification select:focus {
-    background: #197bbd;
+    background: transparent;
     box-shadow: none !important;
     border-radius: 0%;
  }

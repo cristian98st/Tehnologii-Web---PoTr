@@ -28,7 +28,7 @@ function add_tpoem($title,$author,$ortitle,$text,$language,$id,$conn){
     }
     else{
     $title1 = $title1->fetch_assoc();
-    $sql = 'INSERT INTO translated_poems VALUES (0,\'' . $title1['id'] . '\',\'' . $language . '\',\'' . $title . '\',\'' . $author . '\',0,0,\'' . $text . '\',' . $id .',sysdate(),sysdate())';
+    $sql = 'INSERT INTO translated_poems VALUES (0,\'' . $title1['poem_id'] . '\',\'' . $language . '\',\'' . $title . '\',\'' . $author . '\',0,0,\'' . $text . '\',' . $id .',sysdate(),sysdate())';
     // echo $sql;
     
     if ($conn->query($sql) === TRUE) {
@@ -37,11 +37,11 @@ function add_tpoem($title,$author,$ortitle,$text,$language,$id,$conn){
     else{
        die("Error");
     }
-    $sql = 'SELECT max(id) FROM translated_poems';
-    $newid = $conn->query($sql);
-    $newid = $newid->fetch_row();
+    $sql = 'SELECT max(poem_id) FROM translated_poems';
+    $res = $conn->query($sql);
+    $newid = $res->fetch_row();
 
-    $sql = 'INSERT INTO translates VALUES(' .$title1['id'].  ',' .$newid[0] . ')';
+    $sql = 'INSERT INTO translates VALUES(' .$title1['poem_id'].  ',' .$newid[0] . ')';
     if ($conn->query($sql) === TRUE) {
         echo '<p>Translation added</p>';
     }

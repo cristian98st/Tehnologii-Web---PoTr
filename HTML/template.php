@@ -63,7 +63,7 @@ function applyTemplate($connection, $page_name){
         if($page_name == "add_poem")
             echo '<a class="active" href="add_poem.html">Add your poem</a>';
         else
-            echo '<a href="add_poem.html">Add your poem</a>';
+            echo '<a href="add_poem.php">Add your poem</a>';
 
         if($page_name == "aboutus")
             echo '<a class="active" href="aboutus.html">About us</a>';
