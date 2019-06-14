@@ -16,6 +16,19 @@ br{
     margin:10px;
 }
 
+footer{
+    position: sticky;
+    bottom:0;
+    text-align: center;
+    margin:auto;
+    width:100%;
+    height: 20px;
+    background-color: #353531;
+}
+footer > a{
+    color:wheat;
+}
+
 .content{
     display:flex;
     flex-direction: row;

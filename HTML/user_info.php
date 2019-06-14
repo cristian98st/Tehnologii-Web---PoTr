@@ -106,7 +106,10 @@ $subs = get_subs($con, $id);
         </nav>
         <div class="emptybox" style="flex-grow:3"></div>
     </main>
-
+    <footer>
+        <a href="aboutus.php"> About us</a> |
+        <a href="rss.php">RSS Feed</a>
+    </footer>
 </body>
 
 </html>
