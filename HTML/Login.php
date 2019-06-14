@@ -16,9 +16,17 @@
 
 <body>
     <?php
+        $status = null;
+        if(isset($_GET['status']))
+            if($_GET['status']=="failed")
+                $status = "Invalid credentials";
+
         echo "<form class='modal-content' action='".getLogin($connection)."' method='POST'>
             <div class='container'>
                 <h1>Login</h1>
+                <p style='color: #f44336;'>"
+                .$status.
+                "</p>
                 <hr>
 
                 <label for='uname'><b>Username</b></label>

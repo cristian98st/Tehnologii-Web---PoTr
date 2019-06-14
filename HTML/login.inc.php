@@ -1,12 +1,11 @@
 <?php
     function getLogin($conn) {
         if(isset($_POST['loginSubmit'])){
-            $connection = new mysqli("localhost", "root", "", "potr");
             $username = $_POST['uname'];
             $password = $_POST['psw'];
 
             $sql = "SELECT * FROM users WHERE username = '$username' AND password = '$password'";
-            $result = $connection->query($sql);
+            $result = $conn->query($sql);
 
             if(mysqli_num_rows($result) == 1){
                 if($row = $result->fetch_assoc()){
@@ -16,10 +15,8 @@
                 }
             } else {
                 $_SESSION['id'] = -1;
-                header("Location: index.php?login=failed");
+                header("Location: Login.php?status=failed");
                 exit();
-
-                echo "failed";
             }
         }
     }
