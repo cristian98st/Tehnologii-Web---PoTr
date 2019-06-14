@@ -25,14 +25,13 @@ session_start();
         <div class="emptybox"></div>
         <div class="items">
             <h2>
-                Welcome to the Homepage.
+                <?php
+                $username = getUser($connection, $_SESSION['id'])['username'];
+                if($username == "Anonymous")
+                    $username = "Guest";
+                echo "Welcome to Potter, ".$username."!";
+                ?>
             </h2>
-            <p>This is the homepage.
-            <br>
-            <!-- test -->
-            <a href = "view_poem.php?poem_name=Drowsy%20birds&id=2">Bau</a>;
-            <!-- finish test -->
-            </p>
         </div>
         <div class="emptybox"></div>
     </main>

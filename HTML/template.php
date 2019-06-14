@@ -82,15 +82,10 @@ function applyTemplate($connection, $page_name){
         else
             echo '<a href="news.php">News</a>';
 
-        if($page_name == "feed")
-            echo '<a class="active" href="feed.php">Feed</a>';
-        else
-            echo '<a href="feed.php">Feed</a>';
-
         if($page_name == "aboutus")
             echo '<a class="active" href="aboutus.html">About us</a>';
         else
-            echo '<a href="aboutus.php">About us</a>';
+            echo '<a href="aboutus.php  ">About us</a>';
     echo '</div>';
     }
 }
