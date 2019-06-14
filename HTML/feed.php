@@ -30,10 +30,11 @@
         <div class="emptybox"></div>
         <ul class="row-article">
             <?php
-            $_SESSION['id']=1;
+            // $_SESSION['id']=1;
+            session_start();
             require_once('functions.php');
             $con = conn();
-            get_feed($con);
+            get_feed($con,$_SESSION['id']);
             ?>
             </ul>
         <div class="emptybox"></div>

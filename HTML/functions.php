@@ -9,8 +9,8 @@ function conn(){
 }
 
 function add_user($name,$mail,$pass,$conn){
-    $sql = 'INSERT INTO users VALUES (0,\'' . $name . '\',\'' . $mail . '\',\'' . $pass . '\',sysdate(),sysdate()) ';
-    // echo $sql;
+    $sql = 'INSERT INTO users VALUES (0,\'' . $name . '\',\'' . $mail . '\',\'' . $pass . '\',sysdate(),sysdate(),sysdate()) ';
+    echo $sql;
 
     if ($conn->query($sql) === TRUE) {
         echo '<p>Registration succesful</p>';
@@ -156,11 +156,11 @@ function get_feed($conn,$id){
     $date = $date->fetch_assoc();
     $date = $date['last_loggin'];
     while($rez = $arr->fetch_assoc()){
-        get_news_bydate($conn,$rez['subscriber_id'],$date);
+        get_news($conn,$rez['subscriber_id']);
     }
 }
 
-function get_news_text_bydate($id,$type,$conn){
+function get_news_text($id,$type,$conn){
     switch($type){
     case (0):
         $sql = 'SELECT * FROM COMMENTS WHERE comment_id = ' . $id ;
@@ -208,45 +208,6 @@ function get_news_text_bydate($id,$type,$conn){
         <br>"' . substr($table['body'],0,100) . '..."<br> with : ' . $table['upvotes'] .' votes!</p></article>';
         // return '<article><p>Added the translation to: "' . $table['title'] . '"
         // <br>"' . substr($table['body'],0,100) . '..."<br> with : ' . $table['upvotes'] .' votes!</p></article>';
-    }
-}
-
-function get_news_text($id,$type,$conn){
-    switch($type){
-    case (0):
-        $sql = 'SELECT * FROM COMMENTS WHERE comment_id = ' . $id ;
-        $table = $conn->query($sql);
-        $table = $table->fetch_assoc();
-        $sql = 'SELECT * FROM POEMS WHERE poem_id = ' . $table['poem_id'] ;
-        $title = $conn->query($sql);
-        $title = $title->fetch_assoc();
-        $return = '<article><p>Commented on the poem <a href = "view_poem.php?poem_name=' . $title['title'] .'&id='. $title['uploader_id'] .'">"' . $title['title'] . '"</a>:<br>"' . substr($table['body'],0,52) ;
-        // $return = '<article> <p>Commented on the poem ' . $title['title'] . '":<br>"' . substr($table['body'],0,52) ;
-        if(strlen($table['body'])<52){
-            $return = $return . '"<br> with : ' . $table['upvotes'] .' votes!</p></article>';
-        }
-        else{
-            $return = $return . '..."<br> with : ' . $table['upvotes'] .' votes!</p></article>';
-        }
-        return $return;
-    break;
-    case '1':
-        $sql = 'SELECT * FROM POEMS where poem_id = ' . $id ;
-        $table = $conn->query($sql);
-        $table = $table->fetch_assoc();
-        return '<article><p>Added the poem: <a href = "view_poem.php?poem_name=' . $table['title'] . '&id=' . $table['uploader_id'] . '">"' . $table['title'] . '
-        "</a><br>"' . substr($table['body'],0,52) . '..."</p></article>';
-        // return '<article><p>Added the poem: "' . $table['title'] . '
-        // "<br>"' . substr($table['body'],0,52) . '..."</p></article>';
-    break;
-    case '2':
-        $sql = 'SELECT * FROM TRANSLATED_POEMS where poem_id = ' . $id ;
-        $table = $conn->query($sql);
-        $table = $table->fetch_assoc();
-        return '<article><p>Added the translation to: <a href = "view_poem.php?poem_name=' . $table['title'] . '&id=' . $table['uploader_id'] . '">"' . $table['title'] . '"</a>
-        <br>"' . substr($table['body'],0,52) . '..."<br> with : ' . $table['upvotes'] .' votes!</p></article>';
-        // return '<article><p>Added the translation to: "' . $table['title'] . '"
-        // <br>"' . substr($table['body'],0,52) . '..."<br> with : ' . $table['upvotes'] .' votes!</p></article>';
     }
 }
 

@@ -1,9 +1,11 @@
 
 <?php
-if ($_GET['psw']==$_GET['psw-repeat']
+if ($_POST['psw']==$_POST['psw-repeat']
     ) {
         require_once('functions.php');
-        add_user($_GET['user'],$_GET['email'],$_GET['psw']);
+        $conn = conn();
+        add_user($_POST['user'],$_POST['email'],$_POST['psw'],$conn);
+        end_conn($conn);
     }   
     else{
         echo "<p>Try inserting the same password</p>";
