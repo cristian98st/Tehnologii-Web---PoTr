@@ -45,9 +45,9 @@ include "template.php";
 function redirect(){
     require_once('functions.php');
     if(isset($_POST['originalPoem'])){
-        header('Location: add_opoem.html');
+        header('Location: add_opoem.php');
     } else if(isset($_POST['translatedPoem'])){
-        header("Location: add_tpoem.html");
+        header("Location: add_tpoem.php");
     }
 }
 ?>
