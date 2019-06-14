@@ -28,6 +28,7 @@ function add_tpoem($title,$author,$ortitle,$text,$language,$id,$conn){
     }
     else{
     $title1 = $title1->fetch_assoc();
+    $text = mysqli_real_escape_string($conn, $text);
     $sql = 'INSERT INTO translated_poems VALUES (0,\'' . $title1['poem_id'] . '\',\'' . $language . '\',\'' . $title . '\',\'' . $author . '\',0,0,\'' . $text . '\',' . $id .',sysdate(),sysdate())';
     // echo $sql;
     
@@ -267,6 +268,7 @@ function get_userinfo($conn,$id){
 }
 
 function add_poem($title,$author,$text,$id,$conn){
+    $text = mysqli_real_escape_string($conn, $text);
     $sql = 'INSERT INTO poems VALUES (0,\'' . $title . '\',\'' . $author . '\',\'' . $text . '\',\'' . $id . '\',sysdate(),sysdate())';
     // echo $sql;
     
