@@ -131,20 +131,41 @@ function get_ann($conn,$id){
         echo '<h4> Annotations:</h4>';
         while($line = $rez->fetch_assoc()){
             echo '<p><b>'. $line['verse_number'] . '</b> ' . $line['body'] . ' </p>';
-        }
-        $ret='<form action = "add_ann.php" method = "post">
-        <input type="number" max="';
-        $sql = 'SELECT * FROM translated_poems where poem_id = ' .$id;
-        $rows = $conn->query($sql)->fetch_assoc();
-        $array= explode("\n", $rows['body']);
-        $ret = $ret . count($array);
-        $ret = $ret . '" min="1" name="line" step="1" value="1" />
-        <br />
-        <textarea placeholder="Add new adnotation.." name = "text"></textarea></form>';
-        echo $ret;
+        }  
     }
     else{
         echo 'No annotations';
+    }
+    $ret='<form action = "'.add_ann($conn).'" method = "post">
+    <input type="number" max="';
+    $sql = 'SELECT * FROM translated_poems where poem_id = ' .$id;
+    $rows = $conn->query($sql)->fetch_assoc();
+    $array= explode("\n", $rows['body']);
+    $ret = $ret . count($array);
+    $ret = $ret . '" min="1" name="line" step="1" value="1" />
+    <br />
+    <textarea placeholder="Add new adnotation.." name = "text"></textarea>
+    <input type="hidden" name="poem_id" value="'.$rows['poem_id'].'">
+    <input type="hidden" name="poem_title" value="'.$rows['title'].'">
+    <input type="hidden" name="poem_uploader" value="'.$rows['uploader_id'].'">
+    <button name="addAnnotation" type="submit">Add</button>
+    </form>';
+    echo $ret;
+    
+}
+
+function add_ann($conn){
+    if(isset($_POST['addAnnotation'])){
+        $line = $_POST['line'];
+        $body = $_POST['text'];
+        $poem_id = $_POST['poem_id'];
+        $poem_title = $_POST['poem_title'];
+        $poem_uploader = $_POST['poem_uploader'];
+
+        $sql = "INSERT INTO annotations(poem_id, verse_number, body, created_at, updated_at) VALUES('".$poem_id."', '".$line."', '".$body."', sysdate(), sysdate())";
+        $result = $conn->query($sql);
+
+        header("Location: view_poem.php?poem_name=".$poem_title."&id=".$poem_uploader);
     }
 }
 

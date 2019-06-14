@@ -35,7 +35,7 @@ function getPoem($conn){
             <br>
             <p class='poem_body'>"
                 .nl2br($row['body']).
-            "</p>";
+            "</p></div>";
     } else {
         $_SESSION['translated'] = true;
         $_SESSION['poem_id'] = $row['poem_id'];
