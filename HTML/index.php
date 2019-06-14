@@ -36,6 +36,10 @@ session_start();
         </div>
         <div class="emptybox"></div>
     </main>
+    <footer>
+        <a href="aboutus.php"> About us</a> |
+        <a href="rss.php">RSS Feed</a>
+    </footer>
 </body>
 
 </html>

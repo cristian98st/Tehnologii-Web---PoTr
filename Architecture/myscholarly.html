@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="project, info, poem" />
+    <title>Potter</title>
+    <link rel="stylesheet" href="scholarly.css">
+</head>
+
+<body>
+    <header>
+        <p class="title">Potter Documentation</p>
+    </header>
+    <article>
+        <h1>Potter</h1>
+        <ol>
+            <li>
+                Putanu Alexandru
+            </li>
+            <li>
+                Tugui Cristian-Stefan
+            </li>
+        </ol>
+
+
+        <section>
+            <h2>Abstract</h2>
+            <p>
+                This page contains the following: Technologies, Application architecture, Development stages and Task management
+            </p>
+        </section>
+        <section>
+            <h2>Technologies</h2>
+            <h3>HTML</h3>
+            <p>
+                HTML describes the structure of a web page semantically and originally included cues for the appearance
+                of the document.
+            </p>
+            <h3>CSS</h3>
+            <p>
+                Cascading Style Sheets (CSS) is a style sheet language used for describing the presentation of a
+                document written in a
+                markup language like HTML. CSS is designed to enable the separation of presentation and content,
+                including layout, colors,
+                and fonts.
+            </p>
+            <h3>PHP</h3>
+            <p>
+                PHP is a general-purpose scripting language that is especially suited to server-side web development, in
+                which case PHP generally runs on a web server.
+            </p>
+            <h3>GitHub</h3>
+            <p>
+                GitHub offers distributed version control and source code management functionalities with some added
+                features.
+                It provides access control and several collaboration features such as bug tracking, feature requests,
+                task management, and wikis for every project.
+            </p>
+            <h3>MySQL</h3>
+            <p>
+                MySQL is an open-source relational database management system used for managing the data that the web
+                application requires and uses.
+            </p>
+            <h3>XAMPP</h3>
+            <p>
+                XAMPP is a free and open-source cross-platform web server solution stack package consisting mainly of
+                the Apache HTTP Server, MYSQL database, and interpreters for scripts written in the PHP and Perl
+                programming languages.
+            </p>
+        </section>
+        <section>
+            <h2>Application architecture</h2>
+            <h3>1. Goals</h3>
+            <p>
+                Our web solution provides a platform for different poems to be translated, commented and annotated. The
+                site will provide
+                a chart containing information about the activites done by the users. It will also have a feed where
+                users and guests can
+                see latest and/or most relevant modifications or additions to thesite. The latest translations will be
+                avalible via a RSSFeed.
+            </p>
+            <h3>2. Database</h3>
+            <figure typeof="sa:Image">
+                <img src="Potter_DB.png" alt="database-pic">
+                <figcaption> Database </figcaption>
+            </figure>
+            <p>
+                The database consists of 7 tables which atomical data.
+            </p>
+            <h3>3. MVC-pattern</h3>
+            <figure typeof="sa:Image">
+                <img src="MVC.jpg" alt="mvc">
+                <figcaption> MVC </figcaption>
+            </figure>
+            <p>
+                Our app is based on the MVC-pattern. Each page will contain 3 components:
+                <ul>
+                    <li>View: used to show the representation of the content to the user.</li>
+                    <li>Model: used to constantly make changes between the database and the view.
+                        Without the Model, the application would lose the avalibility of the contents from the
+                        controller.</li>
+                    <li>Controller: The MySQL database that commits all the changes and allows the Model to easily
+                        access
+                        previously added info and content.</li>
+                </ul>
+                <h3>4. Application Scenarios</h3>
+                <figure typeof="sa:Image">
+                    <img src="UsecaseDiagram.png" alt="usecase">
+                    <figcaption> Usecase Diagram </figcaption>
+                </figure>
+                <p>
+                    <ol>
+                        <li> A user opens the application.- The first page displayed will be the feed that displays the
+                            latest
+                            annotations and translations added by users, a small chart of users and the search bar.-
+                            From the
+                            feed he can log in, look for a poem, add a poem or just navigate through the page to see the
+                            news.</li>
+                        <li> The user wants to register in the application:-Uses the button "CREATE ACCOUNT"-This is
+                            redirected to
+                            the new account page, where he will enter his username, password, and email address.-If the
+                            email address
+                            is already used for another account or the password does not meet the requirements (minimum
+                            8 characters
+                            alphanumeric with a minimum of one digit + one small letter + one big letter), an error
+                            message will be
+                            displayed, after which the user will be allowed to reintroduce the correct data.-If the
+                            entered data is
+                            correct, the user will be redirected to the account page from where he can manage his data.
+                        </li>
+                        <li>Administration of account data-The user enters the account administration button at the top
+                            right of
+                            any page-This button replaces the "CREATE ACCOUNT" and "LOG IN"-He may change his username,
+                            password
+                            , see the comments he added and delete or go to the page withthat poem4. Log in-It will be
+                            made through
+                            the "LOG IN" button in the upper right corner.-Redirected to the login page, the user can
+                            enter the name
+                            and password, along with the "remember me" option.-If the entered data does not match any
+                            account, the
+                            user will be able to re-enter the data.</li>
+                        <li>Access a poem:-The user can search for a poem by name or text from the search bar, once
+                            found the poem
+                            will be ableto enter the page of his poem and his translations by clicking on them-If the
+                            search poem is
+                            in the feed, a click will redirect the user to the requested page.-If the search poem is not
+                            found, the
+                            search page will display "No results found"</li>
+                        <li>Addition of poems:-From the administration page, the user can click the "ADD POEM" button
+                            from the main bar.
+                            It will be redirected to the poem adding page where he will fill the title, author, text
+                            fields.</li>
+                        <li> Addition of translations:-From the page of a poem, the user can click the "ADD TRANSLATION"
+                            button on the sidebar,
+                            he will be redirected to a page where he can adapt the language of the translation and the
+                            text.</li>
+                        <li> Adding annotations to the text:-From the page of a translated poem or original poem, the
+                            user will be able
+                            to select the text he wants to explain and will be redirected to a page where he can add
+                            annotation text or
+                            modify an existing annotation. Existing annotations can be changed, up-voted or down-voted.
+                        </li>
+                        <li> Adding comments:From the page of a translated poem or poem, the user can use the comments
+                            section at the
+                            bottom of the page to tell their opinions about text or translation.</li>
+                        <li>Follow the authors:From the poem or translation page added by a particular author, the user
+                            has the option
+                            to follow that author through the "FOLLOW" button, thus receiving notifications when he
+                            posts.</li>
+                    </ol>
+                    <h3>5. SiteMap </h3>
+                    <figure typeof="sa:Image">
+                        <img src="SiteMap.png" alt="sitemap">
+                        <figcaption> SiteMap </figcaption>
+                    </figure>
+        </section>
+        <section>
+            <h2>Development stages</h2>
+            <p>
+                We went throught the following stages:
+            </p>
+            <ol>
+                <li>Establishing the overall look of the site along with the database, functionalities and task
+                    management;</li>
+                <li>Prototyping the main HTML + CSS pages;</li>
+                <li>PHP + MySQL development of functionalities according to the task list;</li>
+                <li>Implementation of all the components and integration testing.</li>
+            </ol>
+            <h3>
+                Task management
+            </h3>
+            <dl>
+                <dt><strong>Tugui Cristian-Stefan</strong></dt>
+                <dd> data base (create)</dd>
+                <dd> upvotes/downvotes</dd>
+                <dd> comments</dd>
+                <dd> notifications</dd>
+                <dd> subscribitions</dd>
+                <dd> news (page)</dd>
+                <dd> sign in </dd>
+                <dd> edit poem</dd>
+                <dd> edit comment</dd>
+
+                <dt><strong>Putanu Alexandru</strong></dt>
+                <dd> poem posting</dd>
+	<dd> annotations</dd>
+	<dd> anout us (page)</dd>
+	<dd> feed (page)</dd>
+	<dd> my poems (page)</dd>
+	<dd> user's info (page)</dd>
+    <dd> sign up</dd>
+    <dd> footer</dd>
+    <dd>rss</dd>
+            </dl>
+        </section>
+    </article>
+</body>
+
+</html>
